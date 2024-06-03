@@ -5,21 +5,40 @@ import {
 
 import Main from "../Layout/Main.jsx";
 import Home from "../Pages/Home/Home.jsx";
-import App from "../App.jsx";
+
+import Error from "../Pages/Error/Error.jsx";
+import Register from "../Pages/Register/Register.jsx";
+import Login from "../Pages/Login/Login.jsx";
+import SurveysPage from "../App.jsx";
+import Survey from "../Pages/Survey/Survey.jsx";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <Main></Main>,
+        errorElement: <Error></Error>,
         children:[
             {
                 path: '/',
                 element: <Home></Home>
             },
             {
+                path: '/survey',
+                element: <Survey></Survey>
+            },
+            {
+                path: '/login',
+                element: <Login></Login>
+            },
+            {
                 path: '/app',
-                element: <App></App>
-            }
+                element: <SurveysPage></SurveysPage>
+            },
+            {
+                path: '/register',
+                element: <Register></Register>
+            },
+
             
         ]
     },
