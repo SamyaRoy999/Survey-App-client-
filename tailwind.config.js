@@ -5,7 +5,10 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    fontFamily:{
+      Josefin: ["Josefin Sans"," sans-serif"],
+      Shanti: ["Shanti", "sans-serif"],
+    }
   },
   plugins: [
     require('daisyui'),

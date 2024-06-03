@@ -7,7 +7,7 @@ import { FiLogOut } from "react-icons/fi";
 
 const Navbar = () => {
     const { userSignOut, user, Name, photo, } = useContext(AuthContext)
-    const navlink = <div className='gap-3 flex'>
+    const navlink = <div className='gap-3 flex font-Josefin text-base'>
         <Link to='/'><li>Home</li></Link>
         <Link to='/survey'><li>Survey</li></Link>
     </div>

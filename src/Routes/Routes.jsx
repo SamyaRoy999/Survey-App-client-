@@ -11,6 +11,7 @@ import Register from "../Pages/Register/Register.jsx";
 import Login from "../Pages/Login/Login.jsx";
 import SurveysPage from "../App.jsx";
 import Survey from "../Pages/Survey/Survey.jsx";
+import SurvayDetails from "../Pages/SurvayDetails/SurvayDetails.jsx";
 
 const router = createBrowserRouter([
     {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
             {
                 path: '/survey',
                 element: <Survey></Survey>
+            },
+            {
+                path: '/survey/survayDetails/:id',
+                element: <SurvayDetails></SurvayDetails>
             },
             {
                 path: '/login',
