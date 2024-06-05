@@ -1,67 +1,95 @@
-
-import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form"
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../Providers/AuthProvider";
+import Swal from 'sweetalert2'
+import useAxiosPublicSecour from "../../hooks/useAxiosPublicSecour";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { AuthContext } from "../../AuthProvider/AuthProvider";
+const Signup = () => {
 
 
-const Register = () => {
-    const { emailBaseLogin, userUpdateProfile, setName, setPhotoURl } = useContext(AuthContext)
-
+    const { createUser, updataProfile,  } = useContext(AuthContext);
     const [passwordIcon, setPasswordIcon] = useState(false)
-    const navigate = useNavigate()
-    const location = useLocation()
-    const from = location?.state || "/"
+    const navigate = useNavigate();
+    const axiosPublice = useAxiosPublicSecour();
     const {
         register,
         handleSubmit,
         formState: { errors },
+
     } = useForm()
-
     const onSubmit = (data) => {
-        const { email, password, photoUrl, name } = data
+        const name = data.name
+        const photoUrl = data.photoUrl
+        const email = data.email
+        const password = data.password
+        createUser(email, password)
+            .then(result => {
+                const user = result.user
+                updataProfile(name, photoUrl)
+                    .then(res => {
+                        console.log(res);
+                        const userInfo = {
+                            name,
+                            email
+                        }
+                        axiosPublice.post('/users', userInfo)
+                            .then(res => {
+                                if (res.data) {
+                                    console.log("user added database");
+                                }
+                            })
+                    })
+                if (user) {
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Singup successfull",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
 
-        if (!/(?=.*[a-z])(?=.*[A-Z]).{6,}/.test(password)) {
-            toast.error('Password must have at least 6 characters, including uppercase and lowercase letters.')
-            return;
-        }
-        setName(name)
-        setPhotoURl(photoUrl)
-        console.log(email, password, photoUrl, name);
-
-        emailBaseLogin(email, password)
-            .then((userCredential) => {
-                console.log(userCredential.user)
-                userUpdateProfile(name, photoUrl).then(() => {
-                    if (userCredential.user) {
-                        toast.success("Registration Successful!")
-                        setTimeout(() => {
-                            navigate(from)
-                        }, 2000);
-                    }
-                })
+                setTimeout(() => {
+                    navigate("/")
+                }, 2000);
             })
-            .catch((error) => {
-                const errorMessage = error.message;
-                console.log(errorMessage);
-                toast.error("User is Alrady Exgist")
-            });
-
-
-        // user profileUpdate
-
     }
+    // const hendelGoogleSingUp = () => {
+    //     googleSingIn()
+    //         .then(result => {
+    //             const user = result.user
+    //             if (user) {
+    //                 Swal.fire({
+    //                     position: "center",
+    //                     icon: "success",
+    //                     title: "Login successfull",
+    //                     showConfirmButton: false,
+    //                     timer: 1500
+    //                 });
+    //             }
+    //             const userInfo = {
+    //                 name: result.user.displayName,
+    //                 email: result.user.email
+    //             }
+    //             axiosPublice.post('/users', userInfo)
+    //                 .then(res => {
+    //                     if (res.data) {
+    //                         console.log("user added database");
+    //                     }
+    //                 })
+
+    //             setTimeout(() => {
+    //                 navigate('/')
+    //             }, 2000);
+    //         })
+    // }
 
     return (
-
-
         <div className="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat  bg-[url('https://i.ibb.co/mvd4cyd/sasha-kaunas-67-s-Oi7m-VIk-unsplash.jpg')]" >
-            <ToastContainer />
+       
             <div className="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
                 <div className="text-white">
                     <div className="mb-8 flex flex-col items-center">
@@ -120,9 +148,14 @@ const Register = () => {
                 </div>
             </div>
         </div>
-
     )
-
 }
 
-export default Register
+export default Signup
+
+// <a onClick={hendelGoogleSingUp} className="border-white-500 group m-auto my-0 inline-flex h-12 w-[320px] items-center justify-center space-x-2 rounded-3xl border px-4 py-2 transition-colors duration-300 hover:border-black hover:bg-black focus:outline-none">
+//     <span>
+//     <img className="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo"/>
+//     </span>
+//     <span className="text-sm font-medium text-white">Google</span>
+// </a>
