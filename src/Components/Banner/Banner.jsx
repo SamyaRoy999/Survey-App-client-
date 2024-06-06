@@ -14,6 +14,7 @@ const Banner = () => {
         autoplay: true,
         autoplaySpeed: 4000,
         fade: true,
+        cssEase: 'linear'
     };
     return (
         <div className="container mx-auto">

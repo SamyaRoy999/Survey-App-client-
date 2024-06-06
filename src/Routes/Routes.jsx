@@ -8,13 +8,15 @@ import Home from "../Pages/Home/Home.jsx";
 
 import Error from "../Pages/Error/Error.jsx";
 import Login from "../Pages/Login/Login.jsx";
-import SurveysPage from "../App.jsx";
+
 import Survey from "../Pages/Survey/Survey.jsx";
 import SurvayDetails from "../Pages/SurvayDetails/SurvayDetails.jsx";
 import Deshboard from "../Layout/Deshboard.jsx";
 import ParticipateUser from "../Pages/Dashboard/ParticipateUser/ParticipateUser.jsx";
 import Signup from "../Pages/Signup/Signup.jsx";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers.jsx";
+
+import SurveyCreationForm from "../App.jsx";
 
 const router = createBrowserRouter([
     {
@@ -38,9 +40,9 @@ const router = createBrowserRouter([
                 path: '/login',
                 element: <Login></Login>
             },
-            {
+            {  
                 path: '/app',
-                element: <SurveysPage></SurveysPage>
+                element: <SurveyCreationForm></SurveyCreationForm>
             },
             {
                 path: '/signup',

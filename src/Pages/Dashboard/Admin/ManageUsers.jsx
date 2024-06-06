@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 const ManageUsers = () => {
 
     const axiosSecour = useAxiosSecure();
-    const { data: users = [] } = useQuery({
+    const { data: users = [], refetch } = useQuery({
         queryKey: ['repoData'],
         queryFn: async () => {
 
@@ -14,8 +14,11 @@ const ManageUsers = () => {
 
     })
 
-    const hehdelSelect = (e) => {
-        console.log(e.target.value);
+    const hehdelSelect = async (e, user) => {
+        const newRole = e.target.value;
+        const res = await axiosSecour.patch(`/users/admin/${user._id}`, { role: newRole });
+        console.log(res.data);
+        refetch()
     }
     return (
         <div className=" lg:mt-16 mx-11">
@@ -41,11 +44,11 @@ const ManageUsers = () => {
                                             <td className="whitespace-nowrap  px-6 py-4 font-medium">{index + 1}</td>
                                             <td className="whitespace-nowrap  px-6 py-4">{user.name}</td>
                                             <td className="whitespace-nowrap  px-6 py-4">{user.email}</td>
-                                            <td className="whitespace-nowrap  px-6 py-4">@mdo</td>
+                                            <td className="whitespace-nowrap  px-6 py-4">{user.role ? user.role : 'user'}</td>
                                             <td className="whitespace-nowrap  px-6 py-4">
 
-                                                <select name="" id="" onChange={hehdelSelect}>
-                                                    <option value="" selected>Roles</option>
+                                                <select name="" id="" onChange={(e) => hehdelSelect(e, user)}>
+                                                    <option value="" selected disabled >Roles</option>
                                                     <option value="user">user</option>
                                                     <option value="admin">admin</option>
                                                     <option value="pro-user">pro-user</option>

@@ -1,97 +1,93 @@
-import  { useState } from 'react';
+import { useForm } from "react-hook-form"
 
-const surveys = [
-    {
-        id: 1,
-        title: "Customer Satisfaction Survey",
-        description: "We value your feedback on our products and services.",
-        category: "Customer Feedback",
-        votes: 120
-    },
-    {
-        id: 2,
-        title: "Employee Engagement Survey",
-        description: "Help us improve our workplace environment.",
-        category: "Employee Feedback",
-        votes: 95
-    },
-    {
-        id: 3,
-        title: "Market Research Survey",
-        description: "Share your opinions on the latest market trends.",
-        category: "Market Research",
-        votes: 150
-    },
-    {
-        id: 4,
-        title: "Product Feedback Survey",
-        description: "Tell us what you think about our new product.",
-        category: "Product Feedback",
-        votes: 200
-    },
-    {
-        id: 5,
-        title: "Event Satisfaction Survey",
-        description: "Give us your feedback on the recent event.",
-        category: "Event Feedback",
-        votes: 75
-    }
-];
+const SurveyCreationForm = () => {
 
-const SurveysPage = () => {
-    const [filteredSurveys, setFilteredSurveys] = useState(surveys);
-    const [category, setCategory] = useState('');
-    const [sort, setSort] = useState('');
+    // try {
+    //   const response = await axios.post('http://localhost:5000/api/surveys', data);
+    //   console.log('Survey created successfully:', response.data);
+    // } catch (error) {
+    //   console.error('Error creating survey:', error);
+    // }
+    const {
+        register,
+        handleSubmit,
+        // formState: { errors },
+    } = useForm()
 
-    const handleFilterChange = (e) => {
-        const value = e.target.value;
-        setCategory(value);
-        if (value === '') {
-            setFilteredSurveys(surveys);
-        } else {
-            setFilteredSurveys(surveys.filter(survey => survey.category === value));
-        }
-    };
-
-    const handleSortChange = (e) => {
-        const value = e.target.value;
-        setSort(value);
-        if (value === 'votes') {
-            setFilteredSurveys([...filteredSurveys].sort((a, b) => b.votes - a.votes));
-        }
-    };
+    const onSubmit = (data) => console.log(data)
 
     return (
-        <div className="container mx-auto py-8">
-            <h1 className="text-3xl font-bold mb-4">Surveys</h1>
+        <form onSubmit={handleSubmit(onSubmit)} className="max-w-xl mx-auto p-4 bg-white shadow-md rounded">
             <div className="mb-4">
-                <label className="mr-2">Filter by Category:</label>
-                <select value={category} onChange={handleFilterChange} className="mr-4">
-                    <option value="">All</option>
-                    <option value="Customer Feedback">Customer Feedback</option>
-                    <option value="Employee Feedback">Employee Feedback</option>
-                    <option value="Market Research">Market Research</option>
-                    <option value="Product Feedback">Product Feedback</option>
-                    <option value="Event Feedback">Event Feedback</option>
-                </select>
-                <label className="mr-2">Sort by:</label>
-                <select value={sort} onChange={handleSortChange}>
-                    <option value="">None</option>
-                    <option value="votes">Vote Count</option>
+                <label className="block text-gray-700 text-sm font-bold mb-2">Title</label>
+                <input
+                    name="title"
+                    {...register("title", { required: true })}
+                    required
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                />
+            </div>
+            <div className="mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2">Description</label>
+                <textarea
+                    name="description"
+                    {...register("description", { required: true })}
+                    required
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                ></textarea>
+            </div>
+            <div className="mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2">Options</label>
+                <div className="flex space-x-4">
+                    <input
+                        type="radio"
+                        name="options"
+                        value="yes"
+                        {...register("options", { required: true })}
+                        required
+                        className="mr-2 leading-tight"
+                    />
+                    <label className="text-gray-700">Yes</label>
+                    <input
+                        type="radio"
+                        name="options"
+                        value="no"
+                        {...register("options", { required: true })}
+                        required
+                        className="mr-2 leading-tight"
+                    />
+                    <label className="text-gray-700">No</label>
+                </div>
+            </div>
+            <div className="mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2">Category</label>
+                <select
+                    name="category"
+                    {...register("category", { required: true })}
+                    required
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                >
+                    <option value="technology">Technology</option>
+                    <option value="health">Health</option>
+                    <option value="education">Education</option>
+                    {/* Add more categories as needed */}
                 </select>
             </div>
-            <div>
-                {filteredSurveys.map(survey => (
-                    <div key={survey.id} className="mb-4 p-4 border rounded shadow">
-                        <h2 className="text-2xl font-bold">{survey.title}</h2>
-                        <p>{survey.description}</p>
-                        <p><strong>Votes:</strong> {survey.votes}</p>
-                    </div>
-                ))}
+            <div className="mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2">Deadline</label>
+                <input
+                    type="date"
+                    name="deadline"
+                    {...register("deadline", { required: true })}
+                    required
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                />
             </div>
-        </div>
+            <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                Create Survey
+            </button>
+        </form>
     );
-}
+};
 
-export default SurveysPage;
-
+export default SurveyCreationForm;
