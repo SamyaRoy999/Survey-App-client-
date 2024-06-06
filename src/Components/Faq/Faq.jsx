@@ -10,43 +10,43 @@ const Faq = () => {
                     </h1>
                     <div className="flex flex-col divide-y sm:px-8  divide-gray-700">
                         <details>
-                            <summary className="py-2 outline-none cursor-pointer focus:underline">What is a survey?</summary>
+                            <summary className="py-2 font-Shanti outline-none cursor-pointer focus:underline">What is a survey?</summary>
                             <div className="px-4 pb-4">
                                 <p>A survey is a method of gathering information from individuals, typically by asking them a series of questions.</p>
                             </div>
                         </details>
                         <details>
-                            <summary className="py-2 outline-none cursor-pointer focus:underline">Can I edit my survey after creating it?</summary>
+                            <summary className="py-2 font-Shanti outline-none cursor-pointer focus:underline">Can I edit my survey after creating it?</summary>
                             <div className="px-4 pb-4">
                                 <p>Yes, you can edit your survey by navigating to the survey update page, making the necessary changes, and submitting the updated information.</p>
                             </div>
                         </details>
                         <details>
-                            <summary className="py-2 outline-none cursor-pointer focus:underline">How can I view the responses to my survey?</summary>
+                            <summary className="py-2 font-Shanti outline-none cursor-pointer focus:underline">How can I view the responses to my survey?</summary>
                             <div className="px-4 pb-4">
                                 <p>You can view the responses to your survey by navigating to the survey responses page, where you can see individual responses along with user details.</p>
                             </div>
                         </details>
                         <details>
-                            <summary className="py-2 outline-none cursor-pointer focus:underline">What are the common categories for surveys?</summary>
+                            <summary className="py-2 font-Shanti outline-none cursor-pointer focus:underline">What are the common categories for surveys?</summary>
                             <div className="px-4 pb-4">
                                 <p>Common categories for surveys include technology, health, education, customer satisfaction, market research, and employee feedback.</p>
                             </div>
                         </details>
                         <details>
-                            <summary className="py-2 outline-none cursor-pointer focus:underline">How do I report an inappropriate survey?</summary>
+                            <summary className="py-2 font-Shanti outline-none cursor-pointer focus:underline">How do I report an inappropriate survey?</summary>
                             <div className="px-4 pb-4">
                                 <p>To report an inappropriate survey, go to the survey details page and click on the Report button. Provide the necessary details, and your report will be reviewed by our team.</p>
                             </div>
                         </details>
                         <details>
-                            <summary className="py-2 outline-none cursor-pointer focus:underline">What is your customer support contact?</summary>
+                            <summary className="py-2 font-Shanti outline-none cursor-pointer focus:underline">What is your customer support contact?</summary>
                             <div className="px-4 pb-4">
                                 <p>If you have any questions, concerns, or need assistance, you can reach our customer support team at 9911083755 during our business hours, Monday to Saturday from 10 am to 6 pm. You can also contact us via email at <a href="" className="underline">example@gmail.com</a>.</p>
                             </div>
                         </details>
                         <details>
-                            <summary className="py-2 outline-none cursor-pointer focus:underline">What are your terms and conditions?</summary>
+                            <summary className="py-2 font-Shanti outline-none cursor-pointer focus:underline">What are your terms and conditions?</summary>
                             <div className="px-4 pb-4">
                                 <p>You can find our detailed terms and conditions by visiting our
                                     <a href="" className="underline">Terms of Service</a>

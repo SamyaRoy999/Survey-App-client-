@@ -17,6 +17,7 @@ import Signup from "../Pages/Signup/Signup.jsx";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers.jsx";
 
 import SurveyCreationForm from "../App.jsx";
+import SurveyCreate from "../Pages/Dashboard/Surveyor/SurveyCreate.jsx";
 
 const router = createBrowserRouter([
     {
@@ -40,7 +41,7 @@ const router = createBrowserRouter([
                 path: '/login',
                 element: <Login></Login>
             },
-            {  
+            {
                 path: '/app',
                 element: <SurveyCreationForm></SurveyCreationForm>
             },
@@ -60,13 +61,18 @@ const router = createBrowserRouter([
                 path: "participate",
                 element: <ParticipateUser />
             },
-            
+
             // Admin deshdord
             {
                 path: "admin/users",
                 element: <ManageUsers />
             },
-            
+            // dashboard surveyor
+            {
+                path: "surveyor/create",
+                element: <SurveyCreate />
+            },
+
         ]
     }
 ]);
