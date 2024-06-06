@@ -76,7 +76,7 @@ const Survey = () => {
                 </div>
             </div>
             {filterSurvey.map(item => (
-                <div key={item._id} className="mb-4 font-Josefin  font-bold flex justify-between items-center  p-4 border rounded shadow ">
+                <div key={item._id} className="mb-4 shadow-xl  font-Josefin  font-bold flex justify-between items-center border border-gray-300   p-4  rounded  ">
                     <div>
                         <h2 className="text-2xl text-[#4A4A4A] font-bold pb-4">{item.title}</h2>
                         <p className="font-Shanti font-light pb-2">{item.description}</p>

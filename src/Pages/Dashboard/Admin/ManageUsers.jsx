@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure"
 import { useQuery } from '@tanstack/react-query'
 
@@ -18,6 +19,15 @@ const ManageUsers = () => {
         const newRole = e.target.value;
         const res = await axiosSecour.patch(`/users/admin/${user._id}`, { role: newRole });
         console.log(res.data);
+        if (res.data.acknowledged) {
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: `${user.name} role is ${newRole}`,
+                showConfirmButton: false,
+                timer: 1500
+              });
+        }
         refetch()
     }
     return (
