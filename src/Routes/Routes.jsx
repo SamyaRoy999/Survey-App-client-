@@ -16,8 +16,11 @@ import ParticipateUser from "../Pages/Dashboard/ParticipateUser/ParticipateUser.
 import Signup from "../Pages/Signup/Signup.jsx";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers.jsx";
 
-import SurveyCreationForm from "../App.jsx";
+
 import SurveyCreate from "../Pages/Dashboard/Surveyor/SurveyCreate.jsx";
+import App from "../App.jsx";
+
+
 
 const router = createBrowserRouter([
     {
@@ -43,7 +46,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/app',
-                element: <SurveyCreationForm></SurveyCreationForm>
+                element: <App></App>
             },
             {
                 path: '/signup',

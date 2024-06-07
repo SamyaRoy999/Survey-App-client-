@@ -1,24 +1,42 @@
 import { useForm } from "react-hook-form"
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useState } from "react";
+import DatePicker from "react-datepicker";
 
+import "react-datepicker/dist/react-datepicker.css";
+import Swal from 'sweetalert2'
 const SurveyCreate = () => {
-
+    const [startDate, setStartDate] = useState(new Date());
+    const axiosSecour = useAxiosSecure();
+    console.log(startDate);
     const {
         register,
         handleSubmit,
-    } = useForm()
+        reset
+    } = useForm();
 
-    const onSubmit = (data) => console.log(data)
+    const onSubmit = async (data) => {
+        const { title, description, category, deadline, } = data;
+        const surveyCreateData = { title, description, options:["yes","no"], category, deadline, }
+        console.log(surveyCreateData);
+        const res = await axiosSecour.post('/survayCreate', surveyCreateData);
+        if (res.data.acknowledged) {
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: " Survey Create successfull",
+                showConfirmButton: false,
+                timer: 1500
+            });
+            reset()
+        }
+
+    }
     return (
 
         <div className="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat bg-[url('https://thumbs.dreamstime.com/b/survey-concept-shot-survey-written-paper-chit-163484143.jpg?w=768')]">
             <div className="rounded-xl w-8/12  bg-opacity-10 px-16 py-10 shadow-2xl backdrop-blur-md max-sm:px-8">
                 <div className="">
-                    {/* <div className="mb-8 flex flex-col items-center">
-                        <img src="https://www.logo.wine/a/logo/Instagram/Instagram-Glyph-Color-Logo.wine.svg" width="150" alt="" />
-                        <h1 className="mb-2 text-2xl">Instagram</h1>
-                        <span className="text-gray-300">Enter Login Details</span>
-                    </div> */}
-
                     <form onSubmit={handleSubmit(onSubmit)} className=" mx-auto p-4  shadow-md rounded">
                         <div className="mb-4">
                             <label className="block text-white text-base font-bold mb-2">Title</label>
@@ -26,7 +44,7 @@ const SurveyCreate = () => {
                                 name="title"
                                 {...register("title", { required: true })}
                                 required
-                                className="rounded-3xl w-full  border-none bg-[#0E6251] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                                className="rounded-3xl text-white w-full  border-none bg-[#0E6251] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
                             />
                         </div>
                         <div className="mb-4">
@@ -35,7 +53,7 @@ const SurveyCreate = () => {
                                 name="description"
                                 {...register("description", { required: true })}
                                 required
-                                className="rounded-3xl w-full border-none bg-[#0E6251] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                                className="rounded-3xl text-white w-full border-none bg-[#0E6251] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
                             ></textarea>
                         </div>
 
@@ -45,8 +63,8 @@ const SurveyCreate = () => {
                                 name="category"
                                 {...register("category", { required: true })}
                                 required
-                                className="rounded-3xl w-full border-none bg-[#0E6251] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md" >
-                                <option value="">All</option>
+                                className="rounded-3xl text-white w-full border-none bg-[#0E6251] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md" >
+                                <option value="">Category</option>
                                 <option value="Customer Feedback">Customer Feedback</option>
                                 <option value="Employee Feedback">Employee Feedback</option>
                                 <option value="Market Research">Market Research</option>
@@ -61,9 +79,10 @@ const SurveyCreate = () => {
                                 name="deadline"
                                 {...register("deadline", { required: true })}
                                 required
-                                className="rounded-3xl w-full border-none bg-[#0E6251] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                                className="rounded-3xl text-white w-full border-none bg-[#0E6251] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
                             />
                         </div>
+                        <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
                         <div className="mb-4">
                             <label className="block text-white text-base font-bold mb-2">Options</label>
                             <div className="flex space-x-4">
@@ -71,23 +90,24 @@ const SurveyCreate = () => {
                                     type="radio"
                                     name="options"
                                     value="yes"
-                                    {...register("options", { required: true })}
+                                    selected
+                                    
                                     required
-                                    className="rounded-3xl  border-none bg-[#0E6251] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                                    className="rounded-3xl text-white  border-none bg-[#0E6251] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
                                 />
                                 <label className="text-white">Yes</label>
                                 <input
                                     type="radio"
                                     name="options"
                                     value="no"
-                                    {...register("options", { required: true })}
+                                 
                                     required
-                                    className="rounded-3xl  border-none bg-[#0E6251] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                                    className="rounded-3xl text-white  border-none bg-[#0E6251] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
                                 />
                                 <label className="text-white">No</label>
                             </div>
                         </div>
-                        <button type="submit" className="bg-blue-500 hover:bg-blue-700  font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        <button type="submit" className=" btn btn-outline hover:bg-[#0E6251] text-white  w-full  font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                             Create Survey
                         </button>
                     </form>
