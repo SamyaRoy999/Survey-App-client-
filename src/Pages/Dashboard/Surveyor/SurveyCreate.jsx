@@ -16,8 +16,8 @@ const SurveyCreate = () => {
     } = useForm();
 
     const onSubmit = async (data) => {
-        const { title, description, category, deadline, } = data;
-        const surveyCreateData = { title, description, options:["yes","no"], category, deadline, }
+        const { title, description, category } = data;
+        const surveyCreateData = { title, description, options: ["yes", "no"], category, deadline: startDate.toLocaleDateString("en-GB") }
         console.log(surveyCreateData);
         const res = await axiosSecour.post('/survayCreate', surveyCreateData);
         if (res.data.acknowledged) {
@@ -74,15 +74,8 @@ const SurveyCreate = () => {
                         </div>
                         <div className="mb-4">
                             <label className="block text-white text-base font-bold mb-2">Deadline</label>
-                            <input
-                                type="date"
-                                name="deadline"
-                                {...register("deadline", { required: true })}
-                                required
-                                className="rounded-3xl text-white w-full border-none bg-[#0E6251] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
-                            />
+                            <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
                         </div>
-                        <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
                         <div className="mb-4">
                             <label className="block text-white text-base font-bold mb-2">Options</label>
                             <div className="flex space-x-4">
@@ -91,8 +84,6 @@ const SurveyCreate = () => {
                                     name="options"
                                     value="yes"
                                     selected
-                                    
-                                    required
                                     className="rounded-3xl text-white  border-none bg-[#0E6251] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
                                 />
                                 <label className="text-white">Yes</label>
@@ -100,8 +91,6 @@ const SurveyCreate = () => {
                                     type="radio"
                                     name="options"
                                     value="no"
-                                 
-                                    required
                                     className="rounded-3xl text-white  border-none bg-[#0E6251] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
                                 />
                                 <label className="text-white">No</label>

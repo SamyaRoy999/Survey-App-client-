@@ -1,57 +1,21 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
-const surveys = [
-    {
-        _id: 1,
-        title: "Customer Satisfaction Survey",
-        description: "We value your feedback on our products and services.",
-        category: "Customer Feedback",
-        votes: 120
-    },
-    {
-        _id: 2,
-        title: "Employee Engagement Survey",
-        description: "Help us improve our workplace environment.",
-        category: "Employee Feedback",
-        votes: 95
-    },
-    {
-        _id: 3,
-        title: "Market Research Survey",
-        description: "Share your opinions on the latest market trends.",
-        category: "Market Research",
-        votes: 150
-    },
-    {
-        _id: 4,
-        title: "Product Feedback Survey",
-        description: "Tell us what you think about our new product.",
-        category: "Product Feedback",
-        votes: 200
-    },
-    {
-        _id: 5,
-        title: "Event Satisfaction Survey",
-        description: "Give us your feedback on the recent event.",
-        category: "Event Feedback",
-        votes: 75
-    }
-];
-
+import useSurvay from "../../hooks/useSurvay";
 
 const Survey = () => {
-    const [filterSurvey, setfilterSurvey] = useState(surveys);
-    const [category, setCategory] = useState('')
+    const [survay] = useSurvay();
 
+    const [filterSurvey, setfilterSurvey] = useState(survay);
+    const [category, setCategory] = useState('')
+    
     const handleFilterCategory = (e) => {
         const value = e.target.value;
         setCategory(value);
 
         if (value === '') {
-            setfilterSurvey(surveys);
+            setfilterSurvey(survay);
         } else {
-            const filterValue = surveys.filter(item => item.category === value)
+            const filterValue = survay.filter(item => item.category === value)
             setfilterSurvey(filterValue)
         }
 
