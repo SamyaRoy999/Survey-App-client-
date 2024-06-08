@@ -18,7 +18,7 @@ import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers.jsx";
 
 
 import SurveyCreate from "../Pages/Dashboard/Surveyor/SurveyCreate.jsx";
-import App from "../App.jsx";
+import SurveyDetail from "../App.jsx";
 
 
 
@@ -46,7 +46,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/app',
-                element: <App></App>
+                element: <SurveyDetail/>
             },
             {
                 path: '/signup',

@@ -1,9 +1,9 @@
 import { createContext, useEffect, useState } from "react"
-import { createUserWithEmailAndPassword,  onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 
 import { GoogleAuthProvider } from "firebase/auth";
-import useAxiosPublicSecour from "../hooks/useAxiosPublicSecour";
 import auth from "../firebase/firebase.config";
+import useAxiosPublicSecour from "../hooks/useAxiosPublicSecour";
 
 
 
@@ -22,7 +22,7 @@ const AuthProvider = ({ children }) => {
         setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
-    
+
     // Sign In User
 
     const signInUser = (email, password) => {
@@ -59,17 +59,18 @@ const AuthProvider = ({ children }) => {
         const unsubcribe = onAuthStateChanged(auth, (creantUser) => {
             setUser(creantUser)
             console.log("get user", creantUser);
-            // if (creantUser) {
-            //     const userInfo = { email: creantUser.email }
-            //     axiosPiublic.post('/jwt', userInfo)
-            //         .then(res => {
-            //             if (res.data.token) {
-            //                 localStorage.setItem('access-token', res.data.token)
-            //             }
-            //         })
-            // } else {
-            //     localStorage.removeItem('access-token');
-            // }
+            if (creantUser) {
+                const userInfo = { eamil: creantUser.email };
+
+                axiosPiublic.post('/jwt', userInfo)
+                    .then(res =>{
+                        if (res.data.token) {
+                            localStorage.setItem('access-token', res.data.token);
+                            
+                        }
+                    })
+            }
+
             setLoading(false)
         });
         return () => {

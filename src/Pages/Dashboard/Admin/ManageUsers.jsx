@@ -26,7 +26,7 @@ const ManageUsers = () => {
                 title: `${user.name} role is ${newRole}`,
                 showConfirmButton: false,
                 timer: 1500
-              });
+            });
         }
         refetch()
     }

@@ -2,8 +2,8 @@ import { NavLink, Outlet } from "react-router-dom"
 
 
 const Deshboard = () => {
-    const isAdmin = false
-    const isSurveyor = true
+    const isAdmin = true
+    const isSurveyor = false
     // const user = false
     return (
 
