@@ -1,10 +1,12 @@
 import { NavLink, Outlet } from "react-router-dom"
+import useAdmin from "../hooks/useAdmin"
+import useSurveyor from "../hooks/useSurveyor";
 
 
 const Deshboard = () => {
-    const isAdmin = true
-    const isSurveyor = false
-    // const user = false
+    const [isAdmin] = useAdmin();
+    const [isSurveyor] = useSurveyor();
+   
     return (
 
         <div className="flex ">

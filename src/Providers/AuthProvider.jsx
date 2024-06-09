@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react"
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
-
+import PropTypes from 'prop-types';
 import { GoogleAuthProvider } from "firebase/auth";
 import auth from "../firebase/firebase.config";
 import useAxiosPublicSecour from "../hooks/useAxiosPublicSecour";
@@ -60,13 +60,13 @@ const AuthProvider = ({ children }) => {
             setUser(creantUser)
             console.log("get user", creantUser);
             if (creantUser) {
-                const userInfo = { eamil: creantUser.email };
+                const userInfo = { email: creantUser.email };
 
                 axiosPiublic.post('/jwt', userInfo)
-                    .then(res =>{
+                    .then(res => {
                         if (res.data.token) {
                             localStorage.setItem('access-token', res.data.token);
-                            
+
                         }
                     })
             }
@@ -88,8 +88,6 @@ const AuthProvider = ({ children }) => {
         signOutUser,
         updataProfile,
         googleSingIn,
-
-
     }
 
     return (
@@ -100,3 +98,7 @@ const AuthProvider = ({ children }) => {
 }
 
 export default AuthProvider
+
+AuthProvider.propTypes = {
+    children: PropTypes.any
+};

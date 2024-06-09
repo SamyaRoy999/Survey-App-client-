@@ -69,8 +69,6 @@ const ManageUsers = () => {
 
                                         </tr>
                                     ))}
-
-
                                 </tbody>
                             </table>
                         </div>
