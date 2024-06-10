@@ -1,19 +1,18 @@
-import { useQuery } from "@tanstack/react-query"
-import useAxiosPublicSecour from "./useAxiosPublicSecour"
-
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublicSecour from "./useAxiosPublicSecour";
 
 const useSurvay = () => {
     const axiosPiublic = useAxiosPublicSecour();
 
-    const { data: survay=[], refetch } = useQuery({
+    const { data: survay = [], refetch, isLoading } = useQuery({
         queryKey: ['survay'],
-        queryFn: async ()=>{
+        queryFn: async () => {
             const res = await axiosPiublic.get('/survayCreate');
             return res.data;
         }
-    })
-    
-    return [survay, refetch]
+    });
+
+    return [survay, refetch, isLoading];
 }
 
-export default useSurvay
+export default useSurvay;

@@ -12,7 +12,7 @@ const SurveyDetail = () => {
   };
 
   const [vote, setVote] = useState('');
-  const [result, setResult] = useState({ yes: survey.votes.yes, no: survey.votes.no });
+  const [result, setResult] = useState({ yes: survey.votes.yes + 1, no: survey.votes.no + 1 });
 
   const handleVote = () => {
     if (vote === '') {

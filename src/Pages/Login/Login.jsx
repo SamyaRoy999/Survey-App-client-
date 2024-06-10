@@ -15,7 +15,7 @@ const Login = () => {
     const axiosPublice = useAxiosPublicSecour();
     const navigate = useNavigate()
     const location = useLocation()
-    const from = location?.state || "/"
+    const from = location.state?.from.pathname || '/';
 
     const {
         register,
@@ -83,7 +83,7 @@ const Login = () => {
                     })
 
                 setTimeout(() => {
-                    navigate(from)
+                    navigate(from, { replace: true })
                 }, 2000);
 
             })

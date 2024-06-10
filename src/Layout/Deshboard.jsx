@@ -6,14 +6,14 @@ import useSurveyor from "../hooks/useSurveyor";
 const Deshboard = () => {
     const [isAdmin] = useAdmin();
     const [isSurveyor] = useSurveyor();
-   
+
     return (
 
         <div className="flex ">
             <div className="h-screen lg:w-64 bg-[#0E6251]">
                 {isAdmin ? (
                     <ul className="menu text-white uppercase">
-                        <li><NavLink to='/dashboard/admin/users'>Manage Users Roles</NavLink></li>
+                        <li><NavLink to='admin/users'>Manage Users Roles</NavLink></li>
                     </ul>
                 ) : isSurveyor ? (
                     <ul className="menu text-white uppercase">
@@ -26,6 +26,11 @@ const Deshboard = () => {
                     </ul>
                 )
                 }
+                <div className="divider"></div>
+                <ul className="menu text-white">
+                    <li><NavLink to='/'>Home</NavLink></li>
+                </ul>
+
             </div>
             <div className="flex-1">
                 <Outlet></Outlet>

@@ -19,6 +19,7 @@ import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers.jsx";
 
 import SurveyCreate from "../Pages/Dashboard/Surveyor/SurveyCreate.jsx";
 import SurveyDetail from "../App.jsx";
+import PrivateRoute from "./PrivateRoute.jsx";
 
 
 
@@ -57,8 +58,8 @@ const router = createBrowserRouter([
         ]
     },
     {
-        path: 'dashboard',
-        element: <Deshboard />,
+        path: '/dashboard',
+        element: <PrivateRoute><Deshboard /></PrivateRoute> ,
         children: [
             {
                 path: "participate",
