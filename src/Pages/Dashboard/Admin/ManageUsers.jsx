@@ -1,20 +1,13 @@
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure"
-import { useQuery } from '@tanstack/react-query'
+// import { useQuery } from '@tanstack/react-query'
+import useAllUser from "../../../hooks/useAllUser";
 
 const ManageUsers = () => {
 
     const axiosSecour = useAxiosSecure();
-    const { data: users = [], refetch } = useQuery({
-        queryKey: ['repoData'],
-        queryFn: async () => {
-
-            const res = await axiosSecour.get('/users');
-            return res.data
-        }
-
-    })
-
+    const [users, refetch] = useAllUser();
+    
     const hehdelSelect = async (e, user) => {
         const newRole = e.target.value;
         const res = await axiosSecour.patch(`/users/admin/${user._id}`, { role: newRole });
@@ -59,7 +52,6 @@ const ManageUsers = () => {
 
                                                 <select name="" id="" onChange={(e) => hehdelSelect(e, user)}>
                                                     <option value="" selected disabled >Roles</option>
-                                                    <option value="user">user</option>
                                                     <option value="admin">admin</option>
                                                     <option value="pro-user">pro-user</option>
                                                     <option value="surveyor">surveyor</option>

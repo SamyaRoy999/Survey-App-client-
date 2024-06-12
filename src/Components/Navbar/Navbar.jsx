@@ -7,6 +7,7 @@ import { FiLogOut } from "react-icons/fi";
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
 
+
 const Navbar = () => {
     const { signOutUser, user, Name, photo, } = useContext(AuthContext);
 
