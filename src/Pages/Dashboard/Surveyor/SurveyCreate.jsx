@@ -76,26 +76,7 @@ const SurveyCreate = () => {
                             <label className="block text-white text-base font-bold mb-2">Deadline</label>
                             <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
                         </div>
-                        <div className="mb-4">
-                            <label className="block text-white text-base font-bold mb-2">Options</label>
-                            <div className="flex space-x-4">
-                                <input
-                                    type="radio"
-                                    name="options"
-                                    value="yes"
-                                    selected
-                                    className="rounded-3xl text-white  border-none bg-[#0E6251] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
-                                />
-                                <label className="text-white">Yes</label>
-                                <input
-                                    type="radio"
-                                    name="options"
-                                    value="no"
-                                    className="rounded-3xl text-white  border-none bg-[#0E6251] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
-                                />
-                                <label className="text-white">No</label>
-                            </div>
-                        </div>
+                       
                         <button type="submit" className=" btn btn-outline hover:bg-[#0E6251] text-white  w-full  font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                             Create Survey
                         </button>

@@ -1,62 +1,71 @@
+// import { useContext } from "react";
+// import { AuthContext } from "../../contexts/AuthProvider";
+// import { useQuery } from "@tanstack/react-query";
+// import { useParams } from "react-router-dom";
+// import useAxiosPublicSecour from "../../hooks/useAxiosPublicSecour";
+// import { useState } from "react";
 
-import { useState } from 'react';
+// const SurveyDetails = () => {
+//   const { id } = useParams();
+//   const { user, isProUser } = useContext(AuthContext); // Assuming you have AuthContext to manage user state
+//   const [vote, setVote] = useState('');
+//   const axiosPublic = useAxiosPublicSecour();
 
-const SurveyDetail = () => {
-  // Fake survey data
-  const survey = {
-    id: '1',
-    title: 'Customer Satisfaction Survey',
-    description: 'We would like to know your satisfaction level with our services.',
-    options: ['yes', 'no'],
-    votes: { yes: 10, no: 5 }
-  };
+//   const { data: surveyDetail = {}, refetch, isLoading } = useQuery({
+//     queryKey: ['surveySingle', id],
+//     queryFn: async () => {
+//       const res = await axiosPublic.get(`/surveyCreate/${id}`);
+//       return res.data;
+//     }
+//   });
 
-  const [vote, setVote] = useState('');
-  const [result, setResult] = useState({ yes: survey.votes.yes + 1, no: survey.votes.no + 1 });
+//   const handleVote = async () => {
+//     if (vote && user) {
+//       const res = await axiosPublic.patch(`/vote/${id}`, { option: vote });
+//       refetch(); // Refetch the survey details after voting
+//       console.log(res.data);
+//     }
+//   };
 
-  const handleVote = () => {
-    if (vote === '') {
-      alert('Please select an option to vote.');
-      return;
-    }
+//   const { title, description, options = [], votes, deadline, status } = surveyDetail;
 
-    // Update fake data with vote
-    if (vote === 'yes') {
-      setResult({ ...result, yes: result.yes + 1 });
-    } else if (vote === 'no') {
-      setResult({ ...result, no: result.no + 1 });
-    }
+//    console.log(new Date(deadline));
+//   if (isLoading) {
+//     return <span className="loading loading-bars loading-lg"></span>;
+//   }
 
-    alert('Vote submitted successfully.');
-  };
+//   return (
+//     <div className="mx-auto flex justify-center items-center">
+//       <div className="card w-full lg:w-6/12 bg-base-100 shadow-xl">
+//         <div className="card-body m-3">
+//           <h3 className="text-2xl font-bold font-Josefin text-[#0E6251]">{title}</h3>
+//           <p className="font-semibold text-lg mt-5 font-Shanti">{description}</p>
+//           {options.map((option, index) => (
+//             <label key={index}>
+//               <input type="radio" name="vote" value={option} onChange={() => setVote(option)} />
+//               {option}
+//             </label>
+//           ))}
+//           {user ? (
+//             <button onClick={handleVote} className="btn bg-[#0E6251] text-white w-24 mt-5">Submit</button>
+//           ) : (
+//             <p className="text-red-500">Please log in to vote.</p>
+//           )}
+//           <div>
+//             <p><strong>Yes:</strong> {votes ? votes.yes : 0}</p>
+//             <p><strong>No:</strong> {votes ? votes.no : 0}</p>
+//           </div>
+//           {isProUser && (
+//             <div>
+//               <h4>Add Comment:</h4>
+//               <textarea className="w-full border rounded p-2"></textarea>
+//               <button className="btn bg-[#0E6251] text-white w-24 mt-5">Submit</button>
+//             </div>
+//           )}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
 
-  return (
-    <div>
-      <h1>{survey.title}</h1>
-      <p>{survey.description}</p>
-      <div>
-        <h3>Vote</h3>
-        {survey.options.map((option, index) => (
-          <label key={index}>
-            <input type="radio" name="vote" value={option} onChange={(e) => setVote(e.target.value)} />
-            {option}
-          </label>
-        ))}
-        <button onClick={handleVote}>Submit Vote</button>
-      </div>
-      <div>
-        <h3>Results</h3>
-        <p>Yes: {result.yes}</p>
-        <p>No: {result.no}</p>
-      </div>
-    </div>
-  );
-};
-
-export default SurveyDetail;
-
-
-
-
-
-
+// export default SurveyDetails;

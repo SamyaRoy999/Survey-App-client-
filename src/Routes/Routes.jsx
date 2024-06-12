@@ -5,8 +5,6 @@ import {
 
 import Main from "../Layout/Main.jsx";
 import Home from "../Pages/Home/Home.jsx";
-
-import Error from "../Pages/Error/Error.jsx";
 import Login from "../Pages/Login/Login.jsx";
 
 import Survey from "../Pages/Survey/Survey.jsx";
@@ -18,8 +16,10 @@ import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers.jsx";
 
 
 import SurveyCreate from "../Pages/Dashboard/Surveyor/SurveyCreate.jsx";
-import SurveyDetail from "../App.jsx";
+// import SurveyDetail from "../App.jsx";
 import PrivateRoute from "./PrivateRoute.jsx";
+import ProUser from "../Pages/ProUser/ProUser.jsx";
+import Errors from "../Pages/Error/Error.jsx";
 
 
 
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
     {
         path: "/",
         element: <Main></Main>,
-        errorElement: <Error></Error>,
+        errorElement: <Errors></Errors>,
         children: [
             {
                 path: '/',
@@ -45,21 +45,25 @@ const router = createBrowserRouter([
                 path: '/login',
                 element: <Login></Login>
             },
-            {
-                path: '/app',
-                element: <SurveyDetail/>
-            },
+            // {
+            //     path: '/app',
+            //     element: <SurveyDetail />
+            // },
             {
                 path: '/signup',
                 element: <Signup></Signup>
             },
+            {
+                path: '/Pro-user',
+                element: <ProUser />
+            }
 
 
         ]
     },
     {
         path: '/dashboard',
-        element: <PrivateRoute><Deshboard /></PrivateRoute> ,
+        element: <PrivateRoute><Deshboard /></PrivateRoute>,
         children: [
             {
                 path: "participate",
