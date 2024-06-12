@@ -1,71 +1,89 @@
-// import { useContext } from "react";
-// import { AuthContext } from "../../contexts/AuthProvider";
-// import { useQuery } from "@tanstack/react-query";
-// import { useParams } from "react-router-dom";
-// import useAxiosPublicSecour from "../../hooks/useAxiosPublicSecour";
-// import { useState } from "react";
+// import { useEffect, useState } from "react";
+// import { Link } from "react-router-dom";
+// import useSurvay from "../../hooks/useSurvay";
 
-// const SurveyDetails = () => {
-//   const { id } = useParams();
-//   const { user, isProUser } = useContext(AuthContext); // Assuming you have AuthContext to manage user state
-//   const [vote, setVote] = useState('');
-//   const axiosPublic = useAxiosPublicSecour();
+// const Survey = () => {
+//     const [survay, , isLoading] = useSurvay();
+//     const [filterSurvey, setFilterSurvey] = useState([]);
+//     const [category, setCategory] = useState('');
+//     const [sortOrder, setSortOrder] = useState('asc'); // Initial sort order
 
-//   const { data: surveyDetail = {}, refetch, isLoading } = useQuery({
-//     queryKey: ['surveySingle', id],
-//     queryFn: async () => {
-//       const res = await axiosPublic.get(`/surveyCreate/${id}`);
-//       return res.data;
+//     useEffect(() => {
+//         setFilterSurvey(survay);
+//     }, [survay]);
+
+//     const handleFilterCategory = (e) => {
+//         const value = e.target.value;
+//         setCategory(value);
+
+//         if (value === '') {
+//             setFilterSurvey(survay);
+//         } else {
+//             const filterValue = survay.filter(item => item.category === value);
+//             setFilterSurvey(filterValue);
+//         }
 //     }
-//   });
 
-//   const handleVote = async () => {
-//     if (vote && user) {
-//       const res = await axiosPublic.patch(`/vote/${id}`, { option: vote });
-//       refetch(); // Refetch the survey details after voting
-//       console.log(res.data);
+//     const handleSort = () => {
+//         const sortedSurveys = [...filterSurvey].sort((a, b) => {
+//             const totalVotesA = (a.votes?.yes || 0) + (a.votes?.no || 0);
+//             const totalVotesB = (b.votes?.yes || 0) + (b.votes?.no || 0);
+//             return sortOrder === 'asc' ? totalVotesA - totalVotesB : totalVotesB - totalVotesA;
+//         });
+//         setFilterSurvey(sortedSurveys);
+//         setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
 //     }
-//   };
 
-//   const { title, description, options = [], votes, deadline, status } = surveyDetail;
+//     if (isLoading) {
+//         return <span className="loading loading-bars loading-lg"></span>;
+//     }
 
-//    console.log(new Date(deadline));
-//   if (isLoading) {
-//     return <span className="loading loading-bars loading-lg"></span>;
-//   }
-
-//   return (
-//     <div className="mx-auto flex justify-center items-center">
-//       <div className="card w-full lg:w-6/12 bg-base-100 shadow-xl">
-//         <div className="card-body m-3">
-//           <h3 className="text-2xl font-bold font-Josefin text-[#0E6251]">{title}</h3>
-//           <p className="font-semibold text-lg mt-5 font-Shanti">{description}</p>
-//           {options.map((option, index) => (
-//             <label key={index}>
-//               <input type="radio" name="vote" value={option} onChange={() => setVote(option)} />
-//               {option}
-//             </label>
-//           ))}
-//           {user ? (
-//             <button onClick={handleVote} className="btn bg-[#0E6251] text-white w-24 mt-5">Submit</button>
-//           ) : (
-//             <p className="text-red-500">Please log in to vote.</p>
-//           )}
-//           <div>
-//             <p><strong>Yes:</strong> {votes ? votes.yes : 0}</p>
-//             <p><strong>No:</strong> {votes ? votes.no : 0}</p>
-//           </div>
-//           {isProUser && (
-//             <div>
-//               <h4>Add Comment:</h4>
-//               <textarea className="w-full border rounded p-2"></textarea>
-//               <button className="btn bg-[#0E6251] text-white w-24 mt-5">Submit</button>
+//     return (
+//         <div>
+//             <div className="py-5 px-5">
+//                 <label className="mr-2">Filter by Category:</label>
+//                 <select value={category} className='border-[#4A4A4A]' onChange={handleFilterCategory}>
+//                     <option value="">All</option>
+//                     <option value="Customer Feedback">Customer Feedback</option>
+//                     <option value="Employee Feedback">Employee Feedback</option>
+//                     <option value="Market Research">Market Research</option>
+//                     <option value="Product Feedback">Product Feedback</option>
+//                     <option value="Event Feedback">Event Feedback</option>
+//                 </select>
 //             </div>
-//           )}
+//             <div className="py-5 px-5">
+//                 <button
+//                     type="button"
+//                     className="btn bg-black bg-opacity-30 inline-block rounded-full border-2 border-neutral-800 px-6 pb-[6px] pt-2 text-base font-medium leading-normal text-neutral-800 transition duration-150 ease-in-out hover:border-neutral-800 hover:bg-neutral-100 hover:text-neutral-800 focus:border-neutral-800 focus:bg-neutral-100 focus:text-neutral-800 focus:outline-none focus:ring-0 active:border-neutral-900 active:text-neutral-900 motion-reduce:transition-none dark:text-neutral-600 dark:hover:bg-neutral-900 dark:focus:bg-neutral-900"
+//                     onClick={handleSort}
+//                 >
+//                     Sort by Votes ({sortOrder === 'asc' ? 'Ascending' : 'Descending'})
+//                 </button>
+//             </div>
+//             <div>
+//                 {filterSurvey.map(item => {
+//                     const totalVotes = (item.votes?.yes || 0) + (item.votes?.no || 0);
+//                     return (
+//                         <div key={item._id} className="mb-4 shadow-xl font-Josefin font-bold flex justify-between items-center border border-gray-300 p-4 rounded">
+//                             <div>
+//                                 <h2 className="text-2xl text-[#4A4A4A] font-bold pb-4">{item.title}</h2>
+//                                 <p className="font-Shanti font-light pb-2">{item.description}</p>
+//                                 <p><strong>Votes:</strong> {totalVotes}</p>
+//                             </div>
+//                             <Link to={`/survey/survayDetails/${item._id}`}>
+//                                 <button
+//                                     type="button"
+//                                     className="btn bg-black bg-opacity-30 inline-block rounded-full border-2 border-neutral-800 px-6 pb-[6px] pt-2 text-base font-medium leading-normal text-neutral-800 transition duration-150 ease-in-out hover:border-neutral-800 hover:bg-neutral-100 hover:text-neutral-800 focus:border-neutral-800 focus:bg-neutral-100 focus:text-neutral-800 focus:outline-none focus:ring-0 active:border-neutral-900 active:text-neutral-900 motion-reduce:transition-none dark:text-neutral-600 dark:hover:bg-neutral-900 dark:focus:bg-neutral-900"
+//                                 >
+//                                     Vote
+//                                 </button>
+//                             </Link>
+//                         </div>
+//                     );
+//                 })}
+//             </div>
 //         </div>
-//       </div>
-//     </div>
-//   );
-// };
+//     );
+// }
 
-// export default SurveyDetails;
+// export default Survey;

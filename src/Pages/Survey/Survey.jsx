@@ -130,7 +130,7 @@ const Survey = () => {
                 <div className="py-5 px-5">
                     <button
                         type="button"
-                        // className="btn bg-black bg-opacity-30 inline-block rounded-full border-2 border-neutral-800 px-6 pb-[6px] pt-2 text-base font-medium leading-normal text-neutral-800 transition duration-150 ease-in-out hover:border-neutral-800 hover:bg-neutral-100 hover:text-neutral-800 focus:border-neutral-800 focus:bg-neutral-100 focus:text-neutral-800 focus:outline-none focus:ring-0 active:border-neutral-900 active:text-neutral-900 motion-reduce:transition-none dark:text-neutral-600 dark:hover:bg-neutral-900 dark:focus:bg-neutral-900"
+                      
                         onClick={handleSort}
                     >
                         Sort by Votes ({sortOrder === 'asc' ? 'Ascending' : 'Descending'})
