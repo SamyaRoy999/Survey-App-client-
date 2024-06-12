@@ -30,7 +30,7 @@ const SurvayDetails = () => {
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
-                    title: `Your vote option ${vote}`,
+                    title: `Your vote option ${vote} . count suceefull`,
                     showConfirmButton: false,
                     timer: 1500
                 });
