@@ -5,14 +5,16 @@ import useAxiosPublicSecour from "../../hooks/useAxiosPublicSecour";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from 'sweetalert2'
+import useProUser from "../../hooks/useProUser";
 
 const SurvayDetails = () => {
     const { id } = useParams();
     const [vote, setVote] = useState('');
     const [voting, setVoting] = useState('');
     const axiosPublic = useAxiosPublicSecour();
-    const { user } = useContext(AuthContext)
-
+    const { user } = useContext(AuthContext);
+    const [isProUser] = useProUser();
+    console.log(isProUser);
     const { data: survayDetail = {}, refetch } = useQuery({
         queryKey: ['survaySingle', id],
         queryFn: async () => {
@@ -34,7 +36,7 @@ const SurvayDetails = () => {
                     showConfirmButton: false,
                     timer: 1500
                 });
-                }
+            }
             setVoting(res.data.acknowledged)
         }
         refetch()

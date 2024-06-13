@@ -65,7 +65,7 @@ const CheckoutForm = () => {
             }
         })
         if (confirmError) {
-            console.log("confirmError");
+            // console.log("confirmError");
         } else {
             console.log("paymentIntent", paymentIntent);
             if (paymentIntent.status === "succeeded") {
@@ -78,13 +78,12 @@ const CheckoutForm = () => {
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
-                        title: `${user.name} role is ${newRole}`,
+                        title: 'how! you are a Pro user',
                         showConfirmButton: false,
                         timer: 1500
                     });
                 }
                 refetch()
-
             }
         }
     }
