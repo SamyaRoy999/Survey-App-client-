@@ -14,6 +14,7 @@ const SurvayDetails = () => {
     const axiosPublic = useAxiosPublicSecour();
     const { user } = useContext(AuthContext);
     const [isProUser] = useProUser();
+    
     console.log(isProUser);
     const { data: survayDetail = {}, refetch } = useQuery({
         queryKey: ['survaySingle', id],
@@ -25,7 +26,13 @@ const SurvayDetails = () => {
 
     const handleVote = async () => {
         if (vote && user) {
-            const res = await axiosPublic.patch(`/vote/${id}`, { option: vote });
+            const votes = {
+                vote: vote,
+                name: user.name,
+                email: user.email,
+                photo: user.photoURL
+            }
+            const res = await axiosPublic.patch(`/vote/${id}`, votes);
             console.log(res.data);
 
             if (res.data.acknowledged) {
@@ -42,7 +49,9 @@ const SurvayDetails = () => {
         refetch()
     };
 
-    const { title, description, options = [], votes = {}, deadline } = survayDetail;
+    const { title, description, options = [],  deadline, voters=[] } = survayDetail;
+     const voteYes =  voters.filter(item => item.vote === "yes");
+     const voteNo =  voters.filter(item => item.vote === "no");
 
     const survayDeadlineEnd = new Date() > new Date(deadline);
 
@@ -61,8 +70,8 @@ const SurvayDetails = () => {
                     <button onClick={handleVote} disabled={!user || voting} className="btn bg-[#0E6251] text-white w-24 mt-5">Submit</button>
                     {survayDeadlineEnd || voting &&
                         <div>
-                            <p><span className="font-bold">Yes:</span> {votes ? votes.yes : 0}</p>
-                            <p><span className="font-bold">No:</span> {votes ? votes.no : 0}</p>
+                            <p><span className="font-bold">Yes:</span> {voteYes ? voteYes.length : 0}</p>
+                            <p><span className="font-bold">No:</span> {voteNo ? voteNo.length : 0}</p>
                         </div>
                     }
                 </div>

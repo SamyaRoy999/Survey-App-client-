@@ -2,10 +2,10 @@ import { Link } from "react-router-dom"
 import PropTypes from 'prop-types';
 
 const VotingCard = ({ item }) => {
-    const totalVotes = (item.votes?.yes || 0) + (item.votes?.no || 0);
+
+    const { title, description, voters = [] } = item;
     return (
         <>
-
             <Link to={`/survey/survayDetails/${item._id}`} key={item._id} >
 
                 <div className=' rounded-lg shadow-2xl h-96 flex flex-col items-center px-10'>
@@ -14,9 +14,9 @@ const VotingCard = ({ item }) => {
                     </div>
                     <div className="text-center">
                         <div>
-                            <h2 className="text-xl  font-bold pb-4 text-[#0E6251]">{item.title}</h2>
-                            <p className="font-Shanti text-base font-light pb-2">{item.description}</p>
-                            <p><strong>Votes:</strong> {totalVotes}</p>
+                            <h2 className="text-xl  font-bold pb-4 text-[#0E6251]">{title}</h2>
+                            <p className="font-Shanti text-base font-light pb-2">{description}</p>
+                            <p><strong>Votes:</strong> {voters.length}</p>
                         </div>
                         <button
                             type="button"

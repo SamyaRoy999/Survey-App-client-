@@ -11,13 +11,12 @@ const FeaturedSurveys = () => {
 
     useEffect(() => {
         const mostVoteSurvay = [...survay].sort((a, b) => {
-            const totalVotesA = (a.votes?.yes || 0) + (a.votes?.no || 0);
-            const totalVotesB = (b.votes?.yes || 0) + (b.votes?.no || 0);
+            const totalVotesA = Array.isArray(a.voters) ? a.voters.length : 0;
+            const totalVotesB =  Array.isArray(b.voters) ? b.voters.length : 0;
             return totalVotesB - totalVotesA;
         })
         setFeaturedSort(mostVoteSurvay.slice(0, 6));
     }, [survay])
-
 
     if (isLoading) {
         return <span className="loading loading-bars loading-lg"></span>;
