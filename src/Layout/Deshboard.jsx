@@ -10,7 +10,7 @@ const Deshboard = () => {
     return (
 
         <div className="flex ">
-            <div className="h-screen lg:w-64 bg-[#0E6251]">
+            <div className="h-screen fixed lg:w-64 bg-[#0E6251] ">
                 {isAdmin ? (
                     <ul className="menu text-white uppercase">
                         <li><NavLink to='admin/users'>Manage Users Roles</NavLink></li>
@@ -22,7 +22,7 @@ const Deshboard = () => {
                 ) : (
 
                     <ul className="menu text-white">
-                        <li><NavLink to='/dashboard/participate'>Participate User</NavLink></li>
+                        <li><NavLink to='/dashboard/user/surveys'>Participate User</NavLink></li>
                     </ul>
                 )
                 }
@@ -32,7 +32,7 @@ const Deshboard = () => {
                 </ul>
 
             </div>
-            <div className="flex-1">
+            <div className="flex-1 ml-64">
                 <Outlet></Outlet>
             </div>
         </div>

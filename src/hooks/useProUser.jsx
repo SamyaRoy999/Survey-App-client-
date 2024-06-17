@@ -17,5 +17,4 @@ const useProUser = () => {
     return [isProUser, isProUserLoading]
 }
 
-
 export default useProUser

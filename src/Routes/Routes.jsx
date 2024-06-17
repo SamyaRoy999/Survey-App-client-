@@ -10,7 +10,7 @@ import Login from "../Pages/Login/Login.jsx";
 import Survey from "../Pages/Survey/Survey.jsx";
 import SurvayDetails from "../Pages/SurvayDetails/SurvayDetails.jsx";
 import Deshboard from "../Layout/Deshboard.jsx";
-import ParticipateUser from "../Pages/Dashboard/ParticipateUser/ParticipateUser.jsx";
+import ParticipateUser from "../Pages/Dashboard/User/ParticipateUser.jsx";
 import Signup from "../Pages/Signup/Signup.jsx";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers.jsx";
 
@@ -20,6 +20,7 @@ import SurveyCreate from "../Pages/Dashboard/Surveyor/SurveyCreate.jsx";
 import PrivateRoute from "./PrivateRoute.jsx";
 import ProUser from "../Pages/ProUser/ProUser.jsx";
 import Errors from "../Pages/Error/Error.jsx";
+import UserDashboard from "../App.jsx";
 
 
 
@@ -45,10 +46,10 @@ const router = createBrowserRouter([
                 path: '/login',
                 element: <Login></Login>
             },
-            // {
-            //     path: '/app',
-            //     element: <SurveyDetail />
-            // },
+            {
+                path: '/app',
+                element: <UserDashboard />
+            },
             {
                 path: '/signup',
                 element: <Signup></Signup>
@@ -66,7 +67,7 @@ const router = createBrowserRouter([
         element: <PrivateRoute><Deshboard /></PrivateRoute>,
         children: [
             {
-                path: "participate",
+                path: "user/surveys",
                 element: <ParticipateUser />
             },
 
