@@ -8,6 +8,7 @@ import Swal from 'sweetalert2'
 import useProUser from "../../hooks/useProUser";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { FaRegCommentDots } from "react-icons/fa";
+import { VscReport } from "react-icons/vsc";
 
 const SurvayDetails = () => {
     const { id } = useParams();
@@ -18,7 +19,7 @@ const SurvayDetails = () => {
     const { user } = useContext(AuthContext);
     const [isProUser] = useProUser();
     const [comments, setComments] = useState('');
-
+    const [reportReason, setReportReason] = useState('')
 
 
     const { data: survayDetail = {}, refetch } = useQuery({
@@ -79,7 +80,47 @@ const SurvayDetails = () => {
         }
     };
 
-    const { title, description, options = [], deadline, voters = [], status, comment = [] } = survayDetail;
+    // hendel report 
+
+    const handleReportSubmit = async () => {
+        
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, report it!'
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const reportData = {
+                    surveyId: id,
+                    userEmail: user.email,
+                    reason: reportReason,
+                    timestamp: new Date()
+                };
+
+                const res = await axiosPublic.patch(`/user/report/${id}`, reportData);
+                console.log(res.data);
+
+                if (res.data.acknowledged) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Survey reported successfully',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    setReportReason('');
+                    refetch();
+                }
+            }
+        });
+
+    }
+
+    const { title, description, options = [], deadline, voters = [], status, category, comment = [] } = survayDetail;
     const voteYes = voters.filter(item => item.vote === "yes");
     const voteNo = voters.filter(item => item.vote === "no");
     console.log(comment);
@@ -101,37 +142,71 @@ const SurvayDetails = () => {
                         <div className="flex items-center justify-between">
 
                             <button onClick={handleVote} disabled={!user || voting} className="btn bg-[#0E6251] text-white w-24 mt-5">Submit</button>
+                            <div>
+                                {isProUser && (
+                                    <>
+                                        <button className="btn mt-5 mr-2" onClick={() => document.getElementById('my_modal_1').showModal()}>Comment <FaRegCommentDots className="text-xl text-[#0E6251]" /></button>
+                                        <dialog id="my_modal_1" className="modal">
+                                            <div className="modal-box">
+                                                <div className="mt-5">
+                                                    <h4 className="text-xl font-bold mb-5">Add a Comment</h4>
+                                                    <textarea
+                                                        className="textarea textarea-bordered w-full"
+                                                        value={comments}
+                                                        onChange={(e) => setComments(e.target.value)}
+                                                        placeholder="Write your comment here..."
+                                                    />
+                                                </div>
+                                                <div className="modal-action">
+                                                    <form method="dialog">
+                                                        <button onClick={handleComment} className="btn bg-[#0E6251] text-white mt-3">Submit Comment</button>
+                                                        {/* if there is a button in form, it will close the modal */}
+                                                        <button className="btn">Close</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </dialog>
+                                    </>
+                                )}
 
-                            {isProUser && (
-                                <>
-                                    <button className="btn mt-5" onClick={() => document.getElementById('my_modal_1').showModal()}>Comment <FaRegCommentDots className="text-xl text-[#0E6251]" /></button>
-                                    <dialog id="my_modal_1" className="modal">
-                                        <div className="modal-box">
-                                            <div className="mt-5">
-                                                <h4 className="text-xl font-bold mb-5">Add a Comment</h4>
-                                                <textarea
-                                                    className="textarea textarea-bordered w-full"
-                                                    value={comments}
-                                                    onChange={(e) => setComments(e.target.value)}
-                                                    placeholder="Write your comment here..."
-                                                />
-                                            </div>
-                                            <div className="modal-action">
-                                                <form method="dialog">
-                                                    <button onClick={handleComment} className="btn bg-[#0E6251] text-white mt-3">Submit Comment</button>
-                                                    {/* if there is a button in form, it will close the modal */}
-                                                    <button className="btn">Close</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </dialog>
-                                </>
-                            )}
+
+                                {
+                                    user && (
+                                        <>
+                                            {/* Open the modal using document.getElementById('ID').showModal() method */}
+                                            <button className="btn mt-5 " onClick={() => document.getElementById('my_modal_2').showModal()}>Report  <VscReport className="text-xl text-red-500" ></VscReport></button>
+                                            <dialog id="my_modal_2" className="modal">
+                                                <div className="modal-box">
+                                                    <h3 className="font-bold text-lg mb-4">Report a Survey</h3>
+                                                    <textarea
+                                                        className="textarea textarea-bordered w-full"
+                                                        value={reportReason}
+                                                        onChange={(e) => setReportReason(e.target.value)}
+                                                        placeholder="Reason for reporting"
+                                                    />
+                                                    <div className="modal-action">
+                                                        <form method="dialog">
+                                                            {/* if there is a button in form, it will close the modal */}
+                                                            <button
+                                                                className="mt-2 bg-[#0E6251] text-white py-2 px-4 rounded"
+                                                                onClick={handleReportSubmit}
+                                                            >
+                                                                Submit Report
+                                                            </button>
+                                                            <button className="btn">Close</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </dialog>
+                                        </>
+                                    )
+                                }
+
+                            </div>
                         </div>
                         {survayDeadlineEnd || voting &&
                             <div>
                                 <h2 className=" font-Josefin font-bold text-2xl">Result :</h2>
-
                                 <p className="mx-6"><span className="font-bold  mb-2">Total:</span> {voters.length}</p>
                                 <p className="mx-6"><span className="font-bold  mb-2">Yes:</span> {voteYes ? voteYes.length : 0}</p>
                                 <p className="mx-6"><span className="font-bold  mb-2">No:</span> {voteNo ? voteNo.length : 0}</p>
@@ -140,12 +215,13 @@ const SurvayDetails = () => {
                     </div>
                 </div>
             </div>
-            <div className="mx-6 lg:mx-14">
-                <p><span className="font-bold">deadline:</span> {deadline}</p>
-                <p><span className="font-bold">status</span> {status}</p>
+            <div className="mx-6 mt-4 lg:mx-14">
+                <p><span className="font-bold pr-2  ">category:</span> {category}</p>
+                <p><span className="font-bold pr-2  ">deadline:</span> {deadline}</p>
+                <p><span className="font-bold pr-2  ">status</span> {status}</p>
             </div>
             <div>
-            {comment.map((comData, ind) => (
+                {comment.map((comData, ind) => (
                     <article key={ind} className="pt-14 mb-3 text-base lg:mx-14 border-t border-gray-200 dark:border-gray-700 dark:bg-gray-900">
                         <footer className="flex justify-between items-center mb-2">
                             <div className="flex items-center">

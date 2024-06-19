@@ -1,12 +1,14 @@
 import { NavLink, Outlet } from "react-router-dom"
 import useAdmin from "../hooks/useAdmin"
 import useSurveyor from "../hooks/useSurveyor";
+import useProUser from "../hooks/useProUser";
+
 
 
 const Deshboard = () => {
     const [isAdmin] = useAdmin();
     const [isSurveyor] = useSurveyor();
-
+    const [isProUser] = useProUser();
     return (
 
         <div className="flex ">
@@ -23,6 +25,10 @@ const Deshboard = () => {
 
                     <ul className="menu text-white">
                         <li><NavLink to='/dashboard/user/surveys'>Participate User</NavLink></li>
+                        <li><NavLink to='/dashboard/user/my-reports'>My Reports</NavLink></li>
+                        {isProUser &&
+                            <li><NavLink to='/dashboard/user/comments'> Commented surveys</NavLink></li>
+                        }
                     </ul>
                 )
                 }
