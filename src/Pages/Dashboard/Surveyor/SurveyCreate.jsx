@@ -1,13 +1,15 @@
 import { useForm } from "react-hook-form"
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
-
 import "react-datepicker/dist/react-datepicker.css";
 import Swal from 'sweetalert2'
+import { AuthContext } from "../../../Providers/AuthProvider";
+
 const SurveyCreate = () => {
     const [startDate, setStartDate] = useState(new Date());
     const axiosSecour = useAxiosSecure();
+    const {user} = useContext(AuthContext);
     console.log(startDate);
     const {
         register,
@@ -17,7 +19,7 @@ const SurveyCreate = () => {
 
     const onSubmit = async (data) => {
         const { title, description, category } = data;
-        const surveyCreateData = { title, description, options: ["yes", "no"], category, deadline: startDate.toLocaleDateString("en-GB") }
+        const surveyCreateData = { title, description, options: ["yes", "no"], surveyorEmail: user.email, category, deadline: startDate.toLocaleDateString("en-GB"),  }
         console.log(surveyCreateData);
         const res = await axiosSecour.post('/survayCreate', surveyCreateData);
         if (res.data.acknowledged) {

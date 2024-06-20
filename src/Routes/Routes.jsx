@@ -19,6 +19,8 @@ import Errors from "../Pages/Error/Error.jsx";
 import CommentedProUser from "../Pages/Dashboard/User/CommentedProUser.jsx";
 import SurveyDetail from "../App.jsx";
 import Reportedsurveys from "../Pages/Dashboard/User/Reportedsurveys.jsx";
+import SurveyorSurveys from "../Pages/Dashboard/Surveyor/SurveyorSurveys.jsx";
+import SurveyorSurveysDetails from "../Pages/Dashboard/Surveyor/SurveyorSurveysDetails.jsx";
 
 
 
@@ -89,6 +91,14 @@ const router = createBrowserRouter([
             {
                 path: "surveyor/create",
                 element: <SurveyCreate />
+            },
+            {
+                path: "surveyor/surveys",
+                element: <SurveyorSurveys />
+            },
+            {
+                path: "/dashboard/surveyor/surveys/:id",
+                element: <SurveyorSurveysDetails />,
             },
 
         ]
