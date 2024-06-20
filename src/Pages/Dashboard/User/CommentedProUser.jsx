@@ -39,7 +39,7 @@ const CommentedProUser = () => {
                                                     className="mr-2 w-6 h-6 rounded-full"
                                                     src={comData.photo}
                                                     alt={comData.name}
-                                                />{comData.name}
+                                                />{comData.email}
                                             </p>
                                             <p className="text-sm text-gray-600 dark:text-gray-400"><time>{new Date(comData.timestamp).toLocaleDateString()}</time></p>
                                         </div>

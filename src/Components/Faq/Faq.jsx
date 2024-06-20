@@ -2,10 +2,10 @@
 
 const Faq = () => {
     return (
-        <div className="flex font-Josefin justify-center items-center pt-10  px-4 flex-col-reverse lg:flex-row">
+        <div className="flex font-Josefin justify-center items-center   px-4 flex-col-reverse lg:flex-row">
             <section className=" min-h-screen py-32 flex-1">
                 <div className="container flex flex-col justify-center  mx-auto ">
-                    <h1 className="text-2xl mb-7 md:text-3xl pl-2 my-2 border-l-4  font-sans font-bold border-[#0E6251]  ">
+                    <h1 className="text-2xl mb-7 md:text-3xl pl-2 my-2  font-Josefin font-bold border-[#0E6251] border-l-4   ">
                         Frequenty asked questions
                     </h1>
                     <div className="flex flex-col divide-y sm:px-8  divide-gray-700">

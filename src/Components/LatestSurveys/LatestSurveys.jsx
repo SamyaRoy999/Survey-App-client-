@@ -2,10 +2,14 @@
 import useSurvay from "../../hooks/useSurvay";
 import { useEffect, useState } from "react";
 import VotingCard from "../VotingCard/VotingCard";
+import { Typewriter } from 'react-simple-typewriter'
 
 const LatestSurveys = () => {
     const [survay, , isLoading] = useSurvay();
     const [latestSurveys, setLatestSurveys] = useState([]);
+
+    // type right code 
+
 
     useEffect(() => {
         if (survay.length > 0) {
@@ -20,11 +24,16 @@ const LatestSurveys = () => {
 
     return (
         <div className="my-10 lg:my-20 ">
-            <h3 className="text-3xl lg:text-4xl pl-2 my-2 font-sans font-bold font-Josefin">Latest Surveys</h3>
-            <p className="text-base lg:text-lg pl-2 my-2 font-Shanti  font-light">Discover the most recently created surveys and <br /> share your valuable feedback.</p>
+            <h3 className="text-3xl lg:text-4xl font-Josefin     pl-2 my-5  font-sans font-bold "><span className="border-[#0E6251] px-2 border-l-4"></span> <Typewriter
+                words={['Recently Created ', 'Surveys']}
+                cursor
+                cursorStyle='_'
+                loop={1005}
+            /></h3>
+            <p className="text-sm lg:text-base pl-2 my-2 font-Shanti  font-light">Discover the most recently created surveys and <br /> share your valuable feedback.</p>
             <div className="bg-[#0E6251] mx-2 mt-4 w-40 h-[2px] mb-11"></div>
             <div className="w-full mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                {latestSurveys.map(item =>  <VotingCard key={item._id} item={item}/>)}
+                {latestSurveys.map(item => <VotingCard key={item._id} item={item} />)}
             </div>
         </div>
     );

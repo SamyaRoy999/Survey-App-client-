@@ -1,112 +1,44 @@
-// src/pages/SurveyDetails.js
-import  { useState, useContext } from 'react';
-
-import { AuthContext } from './Providers/AuthProvider';
-
-const fakeSurvey = {
-    _id: '666904d276dc35dfe08be2ff',
-    title: 'New Product Feedback Survey',
-    description: 'We would like to hear your thoughts on our new product. Please vote and let us know if you liked it or not.',
-    options: ['Yes', 'No'],
-    category: 'Product Feedback',
-    deadline: '13/06/2024',
-    status: 'publish',
-    timestamp: '2024-06-12T02:15:46.332+00:00',
-    votes: {},
-    voters: [],
-    comment: [
-        {
-            comment: 'I recently had the chance to try out your new product, and I must say, it is fantastic!',
-            name: 'Samya Roy',
-            email: 'samyaroy80@gmail.com',
-            photo: 'https://avatars.githubusercontent.com/u/53802153?v=4',
-            timestamp: '2024-06-18T12:08:35.734Z',
-        },
-        {
-            comment: 'I found the new product to be extremely user-friendly and innovative.',
-            name: 'Samya Roy',
-            email: 'samyaroy82@gmail.com',
-            photo: 'https://lh3.googleusercontent.com/a/ACg8ocLsN7WLft2dbgTT4e9AG5hC2B3Yyh…',
-            timestamp: '2024-06-19T11:53:14.061Z',
-        },
-    ],
-};
+const steps = [
+    {
+        title: 'নিবন্ধন করুন',
+        description: 'আমাদের ওয়েবসাইটে নিবন্ধন করুন এবং আপনার অ্যাকাউন্ট তৈরি করুন।',
+        icon: '📋'
+    },
+    {
+        title: 'জরিপ তৈরি করুন',
+        description: 'আপনার প্রয়োজনীয় প্রশ্নাবলী এবং বিকল্পগুলি সহ একটি জরিপ তৈরি করুন।',
+        icon: '📝'
+    },
+    {
+        title: 'ভোট দিন',
+        description: 'আপনার জরিপ শেয়ার করুন এবং আপনার ব্যবহারকারীদের ভোট দিতে আমন্ত্রণ করুন।',
+        icon: '🗳️'
+    },
+    {
+        title: 'ফলাফল বিশ্লেষণ করুন',
+        description: 'প্রাপ্ত ফলাফলগুলি বিশ্লেষণ করুন এবং সিদ্ধান্ত গ্রহণে সহায়ক তথ্য সংগ্রহ করুন।',
+        icon: '📊'
+    }
+];
 
 const SurveyDetail = () => {
-    const { user } = useContext(AuthContext);
-    const [reportReason, setReportReason] = useState('');
-    const [showReportForm, setShowReportForm] = useState(false);
-
-    const handleReportSubmit = async () => {
-        const reportData = {
-            surveyId: fakeSurvey._id,
-            userEmail: user.email,
-            reason: reportReason,
-            timestamp: new Date().toISOString(),
-        };
-        console.log(reportData);
-        // try {
-        //     await axiosSecure.post('/report/survey', reportData);
-        //     alert('Report submitted successfully!');
-        //     setShowReportForm(false);
-        // } catch (error) {
-        //     console.error('Error reporting survey:', error);
-        //     alert('Failed to submit report.');
-        // }
-    };
+  
 
     return (
-        <div>
-            <h1 className="text-3xl font-bold">{fakeSurvey.title}</h1>
-            <p className="mt-4">{fakeSurvey.description}</p>
-
-            <div className="mt-6">
-                <h2 className="text-2xl font-bold">Comments</h2>
-                {fakeSurvey.comment.map((comData, ind) => (
-                    <div key={ind} className="mt-4 p-4 border border-gray-300 rounded shadow">
-                        <div className="flex items-center">
-                            <img
-                                className="w-10 h-10 rounded-full"
-                                src={comData.photo}
-                                alt={comData.name}
-                            />
-                            <div className="ml-4">
-                                <p className="font-semibold">{comData.name}</p>
-                                <p className="text-sm text-gray-600">{new Date(comData.timestamp).toLocaleDateString()}</p>
-                            </div>
-                        </div>
-                        <p className="mt-2">{comData.comment}</p>
+        <section className="bg-white py-12">
+        <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">কিভাবে কাজ করে 🛠</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {steps.map((step, index) => (
+                    <div key={index} className="bg-gray-100 p-6 rounded-lg shadow-lg text-center">
+                        <div className="text-4xl mb-4">{step.icon}</div>
+                        <h3 className="text-2xl font-semibold mb-2">{step.title}</h3>
+                        <p className="text-gray-700">{step.description}</p>
                     </div>
                 ))}
             </div>
-
-            {user && (
-                <div className="mt-6">
-                    <button
-                        className="bg-red-500 text-white py-2 px-4 rounded"
-                        onClick={() => setShowReportForm(!showReportForm)}
-                    >
-                        Report
-                    </button>
-                    {showReportForm && (
-                        <div className="mt-4">
-                            <textarea
-                                className="w-full p-2 border border-gray-300 rounded"
-                                value={reportReason}
-                                onChange={(e) => setReportReason(e.target.value)}
-                                placeholder="Reason for reporting"
-                            />
-                            <button
-                                className="mt-2 bg-blue-500 text-white py-2 px-4 rounded"
-                                onClick={handleReportSubmit}
-                            >
-                                Submit Report
-                            </button>
-                        </div>
-                    )}
-                </div>
-            )}
         </div>
+    </section>
     );
 };
 
