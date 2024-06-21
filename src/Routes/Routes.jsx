@@ -21,6 +21,8 @@ import SurveyDetail from "../App.jsx";
 import Reportedsurveys from "../Pages/Dashboard/User/Reportedsurveys.jsx";
 import SurveyorSurveys from "../Pages/Dashboard/Surveyor/SurveyorSurveys.jsx";
 import SurveyorSurveysDetails from "../Pages/Dashboard/Surveyor/SurveyorSurveysDetails.jsx";
+import SurveyUpdate from "../Pages/Dashboard/Surveyor/SurveyUpdate.jsx";
+import UpdateSingle from "../Pages/Dashboard/Surveyor/UpdateSingle.jsx";
 
 
 
@@ -99,6 +101,14 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard/surveyor/surveys/:id",
                 element: <SurveyorSurveysDetails />,
+            },
+            {
+                path: "surveyor/update",
+                element: <SurveyUpdate/>
+            },
+            {
+                path: "surveyor/update/:id",
+                element: <UpdateSingle/>
             },
 
         ]

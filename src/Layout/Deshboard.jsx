@@ -19,8 +19,9 @@ const Deshboard = () => {
                     </ul>
                 ) : isSurveyor ? (
                     <ul className="menu text-white uppercase">
-                        <li><NavLink to='surveyor/create'>Surveyor Create</NavLink></li>
-                        <li><NavLink to='surveyor/surveys'>surveyor surveys</NavLink></li>
+                        <li><NavLink to='surveyor/create'>Survey Create</NavLink></li>
+                        <li><NavLink to='surveyor/surveys'>survey Detailed</NavLink></li>
+                        <li><NavLink to='surveyor/update'>survey update</NavLink></li>
                     </ul>
                 ) : (
 
