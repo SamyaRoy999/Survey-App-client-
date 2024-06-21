@@ -2,12 +2,12 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure"
 // import { useQuery } from '@tanstack/react-query'
 import useAllUser from "../../../hooks/useAllUser";
-
+import { MdDelete } from "react-icons/md";
 const ManageUsers = () => {
 
     const axiosSecour = useAxiosSecure();
     const [users, refetch] = useAllUser();
-    
+
     const hehdelSelect = async (e, user) => {
         const newRole = e.target.value;
         const res = await axiosSecour.patch(`/users/admin/${user._id}`, { role: newRole });
@@ -23,6 +23,20 @@ const ManageUsers = () => {
         }
         refetch()
     }
+    const hendelDelete = async(id) => {
+      const res = await axiosSecour.delete(`/user/role/${id}`);
+      if (res.data.acknowledged) {
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `user delete successfull`,
+            showConfirmButton: false,
+            timer: 1500
+        });
+        refetch()
+    }
+    }
+
     return (
         <div className=" lg:mt-16 mx-11">
             <div className="flex flex-col">
@@ -32,19 +46,18 @@ const ManageUsers = () => {
                             <table
                                 className="min-w-full text-center text-sm font-light text-surface dark:text-white">
                                 <thead
-                                    className="border-b border-neutral-200 bg-[#4A4A4A] font-medium text-white dark:border-white/10">
+                                    className="border-b border-neutral-200 bg-[#0E6251] font-medium text-white dark:border-white/10">
                                     <tr>
-                                        <th scope="col" className=" px-6 py-4">#</th>
                                         <th scope="col" className=" px-6 py-4">Name</th>
                                         <th scope="col" className=" px-6 py-4">Eamil</th>
                                         <th scope="col" className=" px-6 py-4">Role</th>
                                         <th scope="col" className=" px-6 py-4">ManageRole</th>
+                                        <th scope="col" className=" px-6 py-4">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {users.map((user, index) => (
+                                    {users.map((user) => (
                                         <tr key={user._id} className="border-b border-neutral-200 font-medium dark:border-white/10">
-                                            <td className="whitespace-nowrap  px-6 py-4 font-medium">{index + 1}</td>
                                             <td className="whitespace-nowrap  px-6 py-4">{user.name}</td>
                                             <td className="whitespace-nowrap  px-6 py-4">{user.email}</td>
                                             <td className="whitespace-nowrap  px-6 py-4">{user.role ? user.role : 'user'}</td>
@@ -58,6 +71,7 @@ const ManageUsers = () => {
                                                 </select>
 
                                             </td>
+                                            <td onClick={() => hendelDelete(user._id)}><MdDelete className="text-2xl text-center text-red-600"></MdDelete></td>
 
                                         </tr>
                                     ))}

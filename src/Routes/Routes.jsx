@@ -17,13 +17,14 @@ import PrivateRoute from "./PrivateRoute.jsx";
 import ProUser from "../Pages/ProUser/ProUser.jsx";
 import Errors from "../Pages/Error/Error.jsx";
 import CommentedProUser from "../Pages/Dashboard/User/CommentedProUser.jsx";
-import SurveyDetail from "../App.jsx";
+// import SurveyDetail from "../App.jsx";
 import Reportedsurveys from "../Pages/Dashboard/User/Reportedsurveys.jsx";
 import SurveyorSurveys from "../Pages/Dashboard/Surveyor/SurveyorSurveys.jsx";
 import SurveyorSurveysDetails from "../Pages/Dashboard/Surveyor/SurveyorSurveysDetails.jsx";
 import SurveyUpdate from "../Pages/Dashboard/Surveyor/SurveyUpdate.jsx";
 import UpdateSingle from "../Pages/Dashboard/Surveyor/UpdateSingle.jsx";
 import SurvayStatus from "../Pages/Dashboard/Admin/SurvayStatus.jsx";
+import PaymentHistory from "../Pages/Dashboard/Admin/PaymentHistory.jsx";
 
 
 
@@ -49,10 +50,10 @@ const router = createBrowserRouter([
                 path: '/login',
                 element: <Login></Login>
             },
-            {
-                path: '/app',
-                element: <SurveyDetail />
-            },
+            // {
+            //     path: '/app',
+            //     element: <SurveyDetail />
+            // },
             {
                 path: '/signup',
                 element: <Signup></Signup>
@@ -89,6 +90,10 @@ const router = createBrowserRouter([
             {
                 path: "admin/users",
                 element: <ManageUsers />
+            },
+            {
+                path: "admin/payments",
+                element: <PaymentHistory />
             },
             {
                 path: "admin/surveys",

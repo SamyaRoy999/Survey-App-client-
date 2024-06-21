@@ -8,7 +8,9 @@ const useSurvay = () => {
         queryKey: ['survay'],
         queryFn: async () => {
             const res = await axiosPiublic.get('/survayCreate');
-            return res.data;
+            console.log(res.data);
+            const surveyData = res.data.filter(item => item.status === "publish")
+            return surveyData;
         }
     });
 

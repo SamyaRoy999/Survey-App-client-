@@ -74,11 +74,22 @@ const CheckoutForm = () => {
                 const newRole = 'pro-user';
                 const res = await axiosSecour.patch(`/users/admin/${userFilter._id}`, { role: newRole });
                 console.log(res.data);
+
+                const payment = {
+                    email: user?.email,
+                    name: user?.displayName,
+                    date: new Date(),
+                    transactionID: paymentIntent.id
+                }
+                const resposn = await axiosPublic.post('/payment', payment);
+                console.log(resposn ,"post the history");
+
+
                 if (res.data.acknowledged) {
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
-                        title: 'how! you are a Pro user',
+                        title: 'Payment successfull you are a Pro user',
                         showConfirmButton: false,
                         timer: 1500
                     });
@@ -109,7 +120,7 @@ const CheckoutForm = () => {
                     },
                 }}
             />
-            <button type="submit" className='bg-[#0E6251] w-full btn mt-12 text-white' disabled={!stripe || !clientSecret}>
+            <button type="submit" className='bg-[#0E6251] w-full btn mt-12 text-white' disabled={!stripe || !clientSecret || !user}>
                 Pay
             </button>
             <p className='text-red-700'>{errorText.message}</p>
