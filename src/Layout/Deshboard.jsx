@@ -18,11 +18,12 @@ const Deshboard = () => {
                         <li><NavLink to='admin/users'>Manage Users Roles</NavLink></li>
                         <li><NavLink to='admin/surveys'>Manage surveys</NavLink></li>
                         <li><NavLink to='admin/payments'>Payment History</NavLink></li>
+                        <li><NavLink to='admin/surveys-responses'>surveys responses</NavLink></li>
                     </ul>
                 ) : isSurveyor ? (
                     <ul className="menu text-white uppercase">
                         <li><NavLink to='surveyor/create'>Survey Create</NavLink></li>
-                        <li><NavLink to='surveyor/surveys'>survey Detailed</NavLink></li>
+                        <li><NavLink to='surveyor/surveys'>survey  Responses</NavLink></li>
                         <li><NavLink to='surveyor/update'>survey update</NavLink></li>
                     </ul>
                 ) : (

@@ -25,6 +25,8 @@ import SurveyUpdate from "../Pages/Dashboard/Surveyor/SurveyUpdate.jsx";
 import UpdateSingle from "../Pages/Dashboard/Surveyor/UpdateSingle.jsx";
 import SurvayStatus from "../Pages/Dashboard/Admin/SurvayStatus.jsx";
 import PaymentHistory from "../Pages/Dashboard/Admin/PaymentHistory.jsx";
+import SurveyResponses from "../Pages/Dashboard/Admin/SurveyResponses.jsx";
+import SurveyResDetails from "../Pages/Dashboard/Admin/SurveyResDetails.jsx";
 
 
 
@@ -98,6 +100,14 @@ const router = createBrowserRouter([
             {
                 path: "admin/surveys",
                 element: <SurvayStatus />
+            },
+            {
+                path: "admin/surveys-responses",
+                element: <SurveyResponses />
+            },
+            {
+                path: "admin/surveys-responses/:id",
+                element: <SurveyResDetails />
             },
             // dashboard surveyor
             {
