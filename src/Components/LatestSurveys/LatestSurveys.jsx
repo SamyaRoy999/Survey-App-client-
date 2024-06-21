@@ -3,6 +3,7 @@ import useSurvay from "../../hooks/useSurvay";
 import { useEffect, useState } from "react";
 import VotingCard from "../VotingCard/VotingCard";
 import { Typewriter } from 'react-simple-typewriter'
+import Loading from "../Loading/Loading";
 
 const LatestSurveys = () => {
     const [survay, , isLoading] = useSurvay();
@@ -18,9 +19,9 @@ const LatestSurveys = () => {
         }
     }, [survay]);
 
-    if (isLoading) {
-        return <span className="loading loading-bars loading-lg"></span>;
-    }
+    // if (isLoading) {
+    //     return <span className="loading loading-bars loading-lg"></span>;
+    // }
 
     return (
         <div className="my-10 lg:my-20 ">
@@ -31,13 +32,20 @@ const LatestSurveys = () => {
                 loop={1005}
             /></h3>
             <p className="text-sm lg:text-base pl-2 my-2 font-Shanti  font-light">Discover the most recently created surveys and <br /> share your valuable feedback.</p>
-            <div className="bg-[#0E6251] mx-2 mt-4 w-40 h-[2px] mb-11"></div>
-            <div className="w-full mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                {latestSurveys.map(item => <VotingCard key={item._id} item={item} />)}
-            </div>
+            {isLoading ?
+                <div className="h-[70vh] flex items-center justify-center w-12/12"><Loading /></div>
+                : <>
+                    <div className="bg-[#0E6251] mx-2 mt-4 w-40 h-[2px] mb-11"></div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                       {latestSurveys.map(item => <VotingCard key={item._id} item={item} />)}
+                    </div>
+                </>
+            }
         </div>
     );
 }
 
 export default LatestSurveys;
+
+
 

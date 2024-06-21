@@ -23,6 +23,7 @@ import SurveyorSurveys from "../Pages/Dashboard/Surveyor/SurveyorSurveys.jsx";
 import SurveyorSurveysDetails from "../Pages/Dashboard/Surveyor/SurveyorSurveysDetails.jsx";
 import SurveyUpdate from "../Pages/Dashboard/Surveyor/SurveyUpdate.jsx";
 import UpdateSingle from "../Pages/Dashboard/Surveyor/UpdateSingle.jsx";
+import SurvayStatus from "../Pages/Dashboard/Admin/SurvayStatus.jsx";
 
 
 
@@ -88,6 +89,10 @@ const router = createBrowserRouter([
             {
                 path: "admin/users",
                 element: <ManageUsers />
+            },
+            {
+                path: "admin/surveys",
+                element: <SurvayStatus />
             },
             // dashboard surveyor
             {

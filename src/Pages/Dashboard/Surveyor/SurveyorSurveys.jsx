@@ -24,7 +24,7 @@ const SurveyorSurveys = () => {
         <div>
             <h3 className="text-center font-Josefin font-bold text-2xl text-[#0E6251] py-6">Survey Responses with Detailed View</h3>
             {survayorSurvey.map((item) => {
-                const { title, description, _id, deadline } = item;
+                const { title, description, _id, deadline,voters } = item;
                 return (
 
                     <div key={_id} className="mb-4 mx-12 shadow-xl font-Josefin font-bold flex flex-col lg:flex-row  lg:justify-between lg:items-center border border-gray-300 p-4 rounded">
@@ -32,6 +32,7 @@ const SurveyorSurveys = () => {
                             <h2 className="text-2xl  font-bold pb-4 text-[#0E6251]">{title}</h2>
                             <p className="font-Shanti font-light pb-2">{description}</p>
                             <p className="font-Shanti font-light pb-2">Deadline : {deadline}</p>
+                            <p className="font-Shanti font-light pb-2">total votes : {voters.length}</p>
                         </div>
                         <Link to={`${_id}`}>
                             <button

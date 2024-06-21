@@ -16,6 +16,7 @@ const Deshboard = () => {
                 {isAdmin ? (
                     <ul className="menu text-white uppercase">
                         <li><NavLink to='admin/users'>Manage Users Roles</NavLink></li>
+                        <li><NavLink to='admin/surveys'>Manage surveys</NavLink></li>
                     </ul>
                 ) : isSurveyor ? (
                     <ul className="menu text-white uppercase">

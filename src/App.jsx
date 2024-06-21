@@ -1,44 +1,51 @@
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
+const SurvayStatus = () => {
+    const axiosSecure = useAxiosSecure();
 
-const SurveyDetail = () => {
+    const { data: allSurvey = [], refetch } = useQuery({
+        queryKey: ["allSurvey"],
+        queryFn: async () => {
+            const res = await axiosSecure.get('/allSurvey');
+            return res.data;
+        }
+    });
 
+    const handleStatus = async (id, currentStatus) => {
+        const newStatus = currentStatus === "publish" ? "unpublish" : "publish";
+        try {
+            await axiosSecure.put(`/surveys/${id}/status`, { status: newStatus });
+            refetch();
+        } catch (error) {
+            console.error("Error updating status:", error);
+        }
+    };
 
     return (
-        <section className="py-12 bg-gray-100">
-            <div className="container mx-auto px-6 lg:px-20">
-                <h2 className="text-4xl font-bold text-center text-gray-800 mb-8">How It Works</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div className="bg-white p-6 rounded-lg shadow-lg">
-                        <div className="flex items-center justify-center mb-4">
-                            <svg className="w-12 h-12 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                            </svg>
+        <div>
+            {allSurvey.map(item => {
+                const { _id, title, description, voters = [], deadline, status } = item;
+                return (
+                    <div key={_id} className="mb-4 mx-12 shadow-xl font-Josefin font-bold flex justify-between items-center border border-gray-300 p-4 rounded">
+                        <div>
+                            <h2 className="text-2xl font-bold pb-4 text-[#0E6251]">{title}</h2>
+                            <p className="font-Shanti font-light pb-2">{description}</p>
+                            <p className="font-Shanti font-light pb-2">Deadline: {deadline}</p>
+                            <p><strong>Votes:</strong> {voters.length}</p>
                         </div>
-                        <h3 className="text-2xl font-bold mb-2 text-center text-gray-700">Step 1</h3>
-                        <p className="text-gray-600 text-center">Create an account and log in to get started with our survey platform.</p>
+                        <button
+                            type="button"
+                            className="btn bg-[#0E6251] bg-opacity-30 mt-4 inline-block btn-sm rounded-full border-2 border-[#0E6251] px-6 text-base font-medium leading-normal transition duration-150 ease-in-out hover:border-neutral-800 hover:bg-neutral-100 hover:text-neutral-800 focus:border-neutral-800 focus:bg-neutral-100 focus:text-neutral-800 focus:outline-none focus:ring-0 active:border-neutral-900 active:text-neutral-900 motion-reduce:transition-none dark:text-neutral-600 dark:hover:bg-neutral-900 dark:focus:bg-neutral-900"
+                            onClick={() => handleStatus(_id, status)}
+                        >
+                            {status === "publish" ? "Unpublish" : "Publish"}
+                        </button>
                     </div>
-                    <div className="bg-white p-6 rounded-lg shadow-lg">
-                        <div className="flex items-center justify-center mb-4">
-                            <svg className="w-12 h-12 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v8m4-4H8" />
-                            </svg>
-                        </div>
-                        <h3 className="text-2xl font-bold mb-2 text-center text-gray-700">Step 2</h3>
-                        <p className="text-gray-600 text-center">Create and design your survey with easy-to-use tools and customization options.</p>
-                    </div>
-                    <div className="bg-white p-6 rounded-lg shadow-lg">
-                        <div className="flex items-center justify-center mb-4">
-                            <svg className="w-12 h-12 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                            </svg>
-                        </div>
-                        <h3 className="text-2xl font-bold mb-2 text-center text-gray-700">Step 3</h3>
-                        <p className="text-gray-600 text-center">Share your survey and collect responses in real-time with our integrated tools.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+                );
+            })}
+        </div>
     );
 };
 
-export default SurveyDetail;
+export default SurvayStatus;
