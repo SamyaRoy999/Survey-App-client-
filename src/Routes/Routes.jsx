@@ -17,7 +17,6 @@ import PrivateRoute from "./PrivateRoute.jsx";
 import ProUser from "../Pages/ProUser/ProUser.jsx";
 import Errors from "../Pages/Error/Error.jsx";
 import CommentedProUser from "../Pages/Dashboard/User/CommentedProUser.jsx";
-// import SurveyDetail from "../App.jsx";
 import Reportedsurveys from "../Pages/Dashboard/User/Reportedsurveys.jsx";
 import SurveyorSurveys from "../Pages/Dashboard/Surveyor/SurveyorSurveys.jsx";
 import SurveyorSurveysDetails from "../Pages/Dashboard/Surveyor/SurveyorSurveysDetails.jsx";
@@ -43,6 +42,10 @@ const router = createBrowserRouter([
             {
                 path: '/survey',
                 element: <Survey></Survey>
+            },
+            {
+                path: '/survayApp',
+                element: <SurveyorSurveysDetails></SurveyorSurveysDetails>
             },
             {
                 path: '/survey/survayDetails/:id',

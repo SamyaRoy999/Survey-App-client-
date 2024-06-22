@@ -16,9 +16,17 @@ const SurveyResDetails = () => {
     });
     console.log(SurveyDetail);
     const { voters = [] } = SurveyDetail;
+
+    const voteYes = voters.filter(item => item.vote === "yes");
+    const voteNo = voters.filter(item => item.vote === "no");
+
     return (
         <div>
             <h3 className="text-center font-Josefin font-bold text-2xl text-[#0E6251] py-6">Detailed Survey Response Overview</h3>
+            <div className='flex justify-center bg-[#0E6251] mx-14 text-white'>
+                <p className="mx-6"><span className="font-bold  mb-2">Yes:</span> {voteYes ? voteYes.length : 0}</p>
+                <p className="mx-6"><span className="font-bold  mb-2">No:</span> {voteNo ? voteNo.length : 0}</p>
+            </div>
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}
