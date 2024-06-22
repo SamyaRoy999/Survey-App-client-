@@ -33,7 +33,7 @@ const SurveyorSurveys = () => {
                             <h2 className="text-2xl  font-bold pb-4 text-[#0E6251]">{title}</h2>
                             <p className="font-Shanti font-light pb-2">{description}</p>
                             <p className="font-Shanti font-light pb-2">Deadline : {deadline}</p>
-                            <p className="font-Shanti font-light pb-2">total votes : {voters.length}</p>
+                            <p className="font-Shanti font-light pb-2">total votes : {voters?.length}</p>
                         </div>
                         <Link to={`${_id}`}>
                             <button

@@ -8,16 +8,15 @@ import Loading from '../../../Components/Loading/Loading'
 
 const ParticipateUser = () => {
   const { user } = useContext(AuthContext)
-  const [survay, refetch, isLoading] = useSurvay();
+  const [survay=[], refetch, isLoading] = useSurvay();
 
   if (isLoading) {
     return <Loading></Loading>
   }
 
   const survayData = Array.isArray(survay)
-    ? survay.filter(items =>
-      !items.voters.some(vote => vote.email === user.email)
-    ) : []
+  ? survay.filter((items) => !items.voters.some((vote) => vote.email === user.email))
+  : [];
   refetch();
 
   console.log(survayData);

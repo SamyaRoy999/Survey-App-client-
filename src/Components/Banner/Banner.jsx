@@ -51,7 +51,7 @@ const Banner = () => {
                                     Learn More
                                 </button>
                                 <button
-                                    className="relative border border-2 bg-[#1a8b7457] border-[#0E6251] rounded px-4 py-2 inline cursor-pointer text-xl font-bold before:bg-bg-[#0E6251] hover:rounded-b-none before:absolute before:-bottom-0 before:-left-0  before:block before:h-[4px] before:w-full before:origin-bottom-right before:scale-x-0 before:transition before:duration-300 before:ease-in-out hover:before:origin-bottom-left hover:before:scale-x-100">
+                                    className="relative border border-2 bg-[#1a8b7457] border-[#0E6251] rounded px-4 py-2 inline cursor-pointer text-xl font-bold before:bg-[#0E6251] hover:rounded-b-none before:absolute before:-bottom-0 before:-left-0  before:block before:h-[4px] before:w-full before:origin-bottom-right before:scale-x-0 before:transition before:duration-300 before:ease-in-out hover:before:origin-bottom-left hover:before:scale-x-100">
                                     explore
                                 </button>
                             </div>
