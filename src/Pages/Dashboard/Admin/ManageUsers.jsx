@@ -3,11 +3,13 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure"
 // import { useQuery } from '@tanstack/react-query'
 import useAllUser from "../../../hooks/useAllUser";
 import { MdDelete } from "react-icons/md";
+import { useState } from "react";
 const ManageUsers = () => {
 
     const axiosSecour = useAxiosSecure();
     const [users, refetch] = useAllUser();
-
+    const [userFilter, setUserFilter] = useState('')
+    console.log(users);
     const hehdelSelect = async (e, user) => {
         const newRole = e.target.value;
         const res = await axiosSecour.patch(`/users/admin/${user._id}`, { role: newRole });
@@ -23,23 +25,37 @@ const ManageUsers = () => {
         }
         refetch()
     }
-    const hendelDelete = async(id) => {
-      const res = await axiosSecour.delete(`/user/role/${id}`);
-      if (res.data.acknowledged) {
-        Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: `user delete successfull`,
-            showConfirmButton: false,
-            timer: 1500
-        });
-        refetch()
+    const hendelDelete = async (id) => {
+        const res = await axiosSecour.delete(`/user/role/${id}`);
+        if (res.data.acknowledged) {
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: `user delete successfull`,
+                showConfirmButton: false,
+                timer: 1500
+            });
+            refetch()
+        }
     }
+    let filteredUsers = [...users];
+    if (userFilter) {
+        filteredUsers = users.filter((user) => user.role === userFilter);
     }
 
+    console.log(userFilter);
     return (
         <div className=" lg:mt-16 mx-11">
             <div className="flex flex-col">
+                <label htmlFor="">Filter users by role :
+                    <select name="" onChange={(e) => setUserFilter(e.target.value)} id="">
+                        <option value="" selected disabled>users Option</option>
+                        <option value="">All user</option>
+                        <option value="admin">admin</option>
+                        <option value="surveyor">Surveyor</option>
+                        <option value="pro-user">Pro user</option>
+                    </select>
+                </label>
                 <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                         <div className="overflow-hidden">
@@ -56,7 +72,7 @@ const ManageUsers = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {users.map((user) => (
+                                    {filteredUsers.map((user) => (
                                         <tr key={user._id} className="border-b border-neutral-200 font-medium dark:border-white/10">
                                             <td className="whitespace-nowrap  px-6 py-4">{user.name}</td>
                                             <td className="whitespace-nowrap  px-6 py-4">{user.email}</td>
