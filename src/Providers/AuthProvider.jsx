@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react"
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import { GithubAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import PropTypes from 'prop-types';
 import { GoogleAuthProvider } from "firebase/auth";
 import auth from "../firebase/firebase.config";
@@ -10,6 +10,7 @@ import useAxiosPublicSecour from "../hooks/useAxiosPublicSecour";
 
 export const AuthContext = createContext(null)
 const googleProvider = new GoogleAuthProvider();
+const githubProvider = new GithubAuthProvider()
 
 const AuthProvider = ({ children }) => {
 
@@ -35,6 +36,13 @@ const AuthProvider = ({ children }) => {
     const googleSingIn = () => {
         setLoading(true)
         return signInWithPopup(auth, googleProvider)
+    }
+
+    // github sing in
+
+    const githubSingIn = () => {
+        setLoading(true)
+        return signInWithPopup(auth, githubProvider)
     }
 
     // user profile Update
@@ -88,6 +96,7 @@ const AuthProvider = ({ children }) => {
         signOutUser,
         updataProfile,
         googleSingIn,
+        githubSingIn
     }
 
     return (

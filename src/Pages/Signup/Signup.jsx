@@ -57,39 +57,9 @@ const Signup = () => {
                 }, 2000);
             })
     }
-    // const hendelGoogleSingUp = () => {
-    //     googleSingIn()
-    //         .then(result => {
-    //             const user = result.user
-    //             if (user) {
-    //                 Swal.fire({
-    //                     position: "center",
-    //                     icon: "success",
-    //                     title: "Login successfull",
-    //                     showConfirmButton: false,
-    //                     timer: 1500
-    //                 });
-    //             }
-    //             const userInfo = {
-    //                 name: result.user.displayName,
-    //                 email: result.user.email
-    //             }
-    //             axiosPublice.post('/users', userInfo)
-    //                 .then(res => {
-    //                     if (res.data) {
-    //                         console.log("user added database");
-    //                     }
-    //                 })
-
-    //             setTimeout(() => {
-    //                 navigate('/')
-    //             }, 2000);
-    //         })
-    // }
-
+   
     return (
-        <div className="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat  bg-[url('https://i.ibb.co/mvd4cyd/sasha-kaunas-67-s-Oi7m-VIk-unsplash.jpg')]" >
-       
+        <div className="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat  bg-[url('https://i.ibb.co/Qjz4pwC/Adobe-Stock-485095547-Preview.jpg')]" >
             <div className="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
                 <div className="text-white">
                     <div className="mb-8 flex flex-col items-center">
@@ -100,7 +70,7 @@ const Signup = () => {
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="mb-4 text-lg">
                             <input
-                                className="rounded-3xl border-none bg-[#90B0B7] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                                className="rounded-3xl border-none bg-[#0E6251] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
                                 type="text"
                                 name="name"
                                 placeholder="Name"
@@ -109,7 +79,7 @@ const Signup = () => {
                         </div>
                         <div className="mb-4 text-lg">
                             <input
-                                className="rounded-3xl border-none bg-[#90B0B7] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                                className="rounded-3xl border-none bg-[#0E6251] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
                                 type="text"
                                 name="name"
                                 placeholder="id@email.com"
@@ -118,7 +88,7 @@ const Signup = () => {
                         </div>
                         <div className="mb-4 text-lg">
                             <input
-                                className="rounded-3xl border-none bg-[#90B0B7] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                                className="rounded-3xl border-none bg-[#0E6251] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
                                 type="text"
                                 name="name"
                                 placeholder="PhotoURL"
@@ -129,7 +99,7 @@ const Signup = () => {
                             <div className=" relative">
 
                                 <input
-                                    className="rounded-3xl border-none bg-[#90B0B7] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                                    className="rounded-3xl border-none bg-[#0E6251] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
                                     type={passwordIcon ? "text" : "password"}
                                     name="name"
                                     placeholder="*******"
@@ -141,10 +111,11 @@ const Signup = () => {
                             </div>
                         </div>
                         <div className="mt-8 flex justify-center text-lg text-black">
-                            <button type="submit" className="rounded-3xl bg-[#90B0B7] bg-opacity-50 px-10 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-yellow-600">Register</button>
+                            <button type="submit" className="rounded-3xl bg-[#0E6251] bg-opacity-50 px-10 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-yellow-600">Register</button>
                         </div>
                     </form>
-                    <p>Do not have an account   <Link to='/login' className=" text-[#90B0B7]">Login</Link></p>
+                    <p>Do not have an account   <Link to='/login' className=" text-slate-800 font-bold">Login</Link></p>
+                    <p>Back to <Link to='/' className=" text-slate-800 font-bold">Home</Link></p>
                 </div>
             </div>
         </div>
@@ -153,9 +124,3 @@ const Signup = () => {
 
 export default Signup
 
-// <a onClick={hendelGoogleSingUp} className="border-white-500 group m-auto my-0 inline-flex h-12 w-[320px] items-center justify-center space-x-2 rounded-3xl border px-4 py-2 transition-colors duration-300 hover:border-black hover:bg-black focus:outline-none">
-//     <span>
-//     <img className="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo"/>
-//     </span>
-//     <span className="text-sm font-medium text-white">Google</span>
-// </a>

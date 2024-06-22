@@ -3,7 +3,7 @@ import useSurvay from "../../../hooks/useSurvay";
 import { useContext } from "react";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import AlreadyParticipate from "../../../Components/AlreadyParticipate/AlreadyParticipate";
-
+import Loading from '../../../Components/Loading/Loading'
 
 
 const ParticipateUser = () => {
@@ -11,12 +11,13 @@ const ParticipateUser = () => {
   const [survay, refetch, isLoading] = useSurvay();
 
   if (isLoading) {
-    return <span className="loading loading-bars loading-lg"></span>;
+    return <Loading></Loading>
   }
 
-  const survayData = survay.filter(items =>
-    !items.voters.some(vote => vote.email === user.email)
-  )
+  const survayData = Array.isArray(survay)
+    ? survay.filter(items =>
+      !items.voters.some(vote => vote.email === user.email)
+    ) : []
   refetch();
 
   console.log(survayData);

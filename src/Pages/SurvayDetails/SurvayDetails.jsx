@@ -120,12 +120,22 @@ const SurvayDetails = () => {
 
     }
 
+    function parseDateString(dateString) {
+        if (!dateString) return new Date('Invalid Date');
+        const [day, month, year] = dateString.split('/');
+        return new Date(`${year}-${month}-${day}`);
+    }
+
     const { title, description, options = [], deadline, voters = [], status, category, comment = [] } = survayDetail;
     const voteYes = voters.filter(item => item.vote === "yes");
     const voteNo = voters.filter(item => item.vote === "no");
-    console.log(comment);
-    const survayDeadlineEnd = new Date() > new Date(deadline);
 
+
+    const parsedDeadline = parseDateString(deadline);
+    const survayDeadlineEnd = new Date().toLocaleDateString("en-GB") > parsedDeadline.toLocaleDateString("en-GB");
+
+    console.log(parsedDeadline);
+    console.log(new Date().toLocaleDateString("en-GB"));
     return (
         <>
             <div className="mx-auto flex justify-center items-center">
@@ -204,14 +214,14 @@ const SurvayDetails = () => {
 
                             </div>
                         </div>
-                        {survayDeadlineEnd || voting &&
+                        {(survayDeadlineEnd || voting) && (
                             <div>
                                 <h2 className=" font-Josefin font-bold text-2xl">Result :</h2>
                                 <p className="mx-6"><span className="font-bold  mb-2">Total:</span> {voters.length}</p>
                                 <p className="mx-6"><span className="font-bold  mb-2">Yes:</span> {voteYes ? voteYes.length : 0}</p>
                                 <p className="mx-6"><span className="font-bold  mb-2">No:</span> {voteNo ? voteNo.length : 0}</p>
                             </div>
-                        }
+                        )}
                     </div>
                 </div>
             </div>

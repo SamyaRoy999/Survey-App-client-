@@ -46,7 +46,10 @@ const Navbar = () => {
                         {navlink}
                     </ul>
                 </div>
-                <a className=" lg:text-2xl font-Josefin font-bold ">Survey<span className='text-[#0E6251] '>scape</span></a>
+                <div className="w-14 flex  items-center">
+                    <img src="https://i.ibb.co/JB9YGTB/tripod-logo-stock-illustration-design-260nw-1828569623-prev-ui.png" alt="" />
+                    <a className=" lg:text-2xl font-Josefin font-bold ">Survey<span className='text-[#0E6251] '>scape</span></a>
+                </div>
             </div>
             <div className="navbar-center hidden  lg:flex ">
                 <ul className="menu menu-horizontal px-1   gap-3 flex font-Josefin text-base">

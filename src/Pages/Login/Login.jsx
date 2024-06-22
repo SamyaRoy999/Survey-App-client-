@@ -11,7 +11,7 @@ import useAxiosPublicSecour from '../../hooks/useAxiosPublicSecour';
 const Login = () => {
 
 
-    const { googleSingIn, signInUser } = useContext(AuthContext)
+    const { googleSingIn, signInUser, githubSingIn } = useContext(AuthContext)
     const axiosPublice = useAxiosPublicSecour();
     const navigate = useNavigate()
     const location = useLocation()
@@ -60,7 +60,7 @@ const Login = () => {
     const hendelSocial = (socialLogin) => {
         socialLogin()
             .then(result => {
-                
+
                 const userInfo = {
                     name: result.user.displayName,
                     email: result.user.email
@@ -88,39 +88,10 @@ const Login = () => {
 
             })
     }
-    // const hendelGoogleSingUp = () => {
-    //     googleSingIn()
-    //         .then(result => {
-    //             const user = result.user
-    //             if (user) {
-    //                 Swal.fire({
-    //                     position: "center",
-    //                     icon: "success",
-    //                     title: "Login successfull",
-    //                     showConfirmButton: false,
-    //                     timer: 1500
-    //                 });
-    //             }
-    //             const userInfo = {
-    //                 name: result.user.displayName,
-    //                 email: result.user.email
-    //             }
-    //             useAxiosPublic.post('/user', userInfo)
-    //                 .then(res => {
-    //                     if (res.data) {
-    //                         console.log("user added database");
-    //                     }
-    //                 })
-
-    //             setTimeout(() => {
-    //                 navigate(from, { replace: true })
-    //             }, 2000);
-    //         })
-    // }
 
     return (
 
-        <div className="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat bg-[url('https://i.ibb.co/chkFtjL/patrick-robert-doyle-AH8z-KXq-FITA-unsplash.jpg')]">
+        <div className="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat bg-[url('https://i.ibb.co/gv6cYhX/Adobe-Stock-243413980-Preview.jpg')]">
             <div className="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
                 <div className="text-white">
                     <div className="mb-8 flex flex-col items-center">
@@ -132,7 +103,7 @@ const Login = () => {
                         <div className="mb-4 text-lg">
                             <input type="email"
                                 name="name"
-                                className="rounded-3xl border-none bg-[#90B0B7] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md" placeholder="id@email.com"
+                                className="rounded-3xl border-none bg-[#0E6251] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md" placeholder="id@email.com"
                                 {...register("email", { required: true })} />
                             {errors.email && <span>This field is required</span>}
                         </div>
@@ -141,12 +112,12 @@ const Login = () => {
                             <input
                                 type="password"
                                 name="password"
-                                className="rounded-3xl border-none bg-[#90B0B7] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md" placeholder="*********"
+                                className="rounded-3xl border-none bg-[#0E6251] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md" placeholder="*********"
                                 {...register("password", { required: true })} />
                             {errors.password && <span>This field is required</span>}
                         </div>
                         <div className="mt-8 flex justify-center text-lg text-black">
-                            <button type="submit" className="rounded-3xl bg-[#90B0B7] bg-opacity-50 px-10 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-yellow-600">Login</button>
+                            <button type="submit" className="rounded-3xl bg-[#0E6251] bg-opacity-50 px-10 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-yellow-600">Login</button>
                         </div>
                         {/*  Divider  */}
                         <div
@@ -160,7 +131,7 @@ const Login = () => {
                     <p>Continue with</p>
                     <div className=' flex justify-center  '>
                         <a
-                            className="rounded-3xl  flex items-center gap-2 border-none bg-[#90B0B7] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                            className="rounded-3xl  flex items-center gap-2 border-none bg-[#0E6251] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
 
                             onClick={() => hendelSocial(googleSingIn)}
                             role="button"
@@ -171,8 +142,21 @@ const Login = () => {
                             />
                             Google
                         </a>
+                        <a
+                            className="rounded-3xl  flex items-center gap-2 border-none bg-[#0E6251] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+
+                            onClick={() => hendelSocial(githubSingIn)}
+                            role="button"
+                            data-twe-ripple-init
+                            data-twe-ripple-color="light">
+                            {/*  Facebook  */}
+                            <IoLogoGoogle className=" text-2xl "
+                            />
+                            Github
+                        </a>
                     </div>
-                    <p>Do not have an account   <Link to='/signup' className=" text-[#90B0B7]">Register</Link></p>
+                    <p>Do not have an account   <Link to='/signup' className=" text-slate-800 font-bold">Register</Link></p>
+                    <p>back to    <Link to='/' className=" text-slate-800 font-bold">Home</Link></p>
                 </div>
             </div>
         </div>

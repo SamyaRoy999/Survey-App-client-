@@ -49,18 +49,6 @@ const router = createBrowserRouter([
                 element: <SurvayDetails></SurvayDetails>
             },
             {
-                path: '/login',
-                element: <Login></Login>
-            },
-            // {
-            //     path: '/app',
-            //     element: <SurveyDetail />
-            // },
-            {
-                path: '/signup',
-                element: <Signup></Signup>
-            },
-            {
                 path: '/Pro-user',
                 element: <ProUser />
             }
@@ -69,7 +57,15 @@ const router = createBrowserRouter([
         ]
     },
     {
-        path: '/dashboard',
+        path: '/login',
+        element: <Login></Login>
+    },
+    {
+        path: '/signup',
+        element: <Signup></Signup>
+    },
+    {
+        path: 'dashboard',
         element: <PrivateRoute><Deshboard /></PrivateRoute>,
         children: [
             {
@@ -124,11 +120,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "surveyor/update",
-                element: <SurveyUpdate/>
+                element: <SurveyUpdate />
             },
             {
                 path: "surveyor/update/:id",
-                element: <UpdateSingle/>
+                element: <UpdateSingle />
             },
 
         ]
