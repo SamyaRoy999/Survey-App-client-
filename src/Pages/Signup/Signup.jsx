@@ -29,8 +29,8 @@ const Signup = () => {
             .then(result => {
                 const user = result.user
                 updataProfile(name, photoUrl)
-                    .then(res => {
-                        console.log(res);
+                    .then(() => {
+                        
                         const userInfo = {
                             name,
                             email
@@ -38,7 +38,7 @@ const Signup = () => {
                         axiosPublice.post('/users', userInfo)
                             .then(res => {
                                 if (res.data) {
-                                    console.log("user added database");
+                                    // console.log("user added database");
                                 }
                             })
                     })

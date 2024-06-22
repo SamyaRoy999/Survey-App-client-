@@ -15,7 +15,7 @@ const CommentedProUser = () => {
             return res.data
         }
     })
-    console.log(proComments);
+    // console.log(proComments);
 
     // const { title } = proComments;
 

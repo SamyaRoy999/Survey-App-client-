@@ -66,7 +66,7 @@ const AuthProvider = ({ children }) => {
 
         const unsubcribe = onAuthStateChanged(auth, (creantUser) => {
             setUser(creantUser)
-            console.log("get user", creantUser);
+            // console.log("get user", creantUser);
             if (creantUser) {
                 const userInfo = { email: creantUser.email };
 

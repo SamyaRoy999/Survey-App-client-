@@ -15,20 +15,15 @@ A company is seeking a talented Developer to contribute to developing a Survey a
 
 A survey gathers information or feedback from individuals to understand their opinions, preferences, or experiences on a particular topic or subject. Surveys can be conducted through various mediums such as online forms, questionnaires, interviews, or telephone calls. They are widely used in market research, academic studies, customer satisfaction analysis, and organizational evaluations.
 
-## Example Websites
-
-- SurveyMonkey (www.surveymonkey.com)
-- Google Forms (www.google.com/forms)
-- Typeform (www.typeform.com)
 
 ## Admin Login
 
-- **Username:** admin
-- **Password:** admin123
+- **Username:** samya roy
+- **Password:** 12345Aa
 
 ## Live Site URL
 
-You can access the live site at [SurveyApp Live](https://your-live-site-url.com)
+You can access the live site at [SurveyApp Live](https://survey-auth-bef1d.web.app/)
 
 ## Features
 1. **User Authentication:**

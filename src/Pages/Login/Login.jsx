@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom"
 import { AuthContext } from '../../Providers/AuthProvider';
 import { useForm } from "react-hook-form"
 import Swal from 'sweetalert2'
+import { FaGithub } from "react-icons/fa";
 
 
 import { IoLogoGoogle } from "react-icons/io";
@@ -27,7 +28,7 @@ const Login = () => {
 
         const email = data.email;
         const password = data.password;
-        console.log(email, password);
+        // console.log(email, password);
 
         signInUser(email, password)
             .then((user) => {
@@ -65,7 +66,7 @@ const Login = () => {
                     name: result.user.displayName,
                     email: result.user.email
                 }
-                console.log(userInfo);
+                // console.log(userInfo);
                 axiosPublice.post('/users', userInfo)
                     .then(res => {
                         if (res.data) {
@@ -78,7 +79,7 @@ const Login = () => {
                                     timer: 1500
                                 });
                             }
-                            console.log("user added database");
+                            // console.log("user added database");
                         }
                     })
 
@@ -129,7 +130,7 @@ const Login = () => {
                         </div>
                     </form>
                     <p>Continue with</p>
-                    <div className=' flex justify-center  '>
+                    <div className=' flex justify-center gap-3'>
                         <a
                             className="rounded-3xl  flex items-center gap-2 border-none bg-[#0E6251] bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
 
@@ -150,7 +151,7 @@ const Login = () => {
                             data-twe-ripple-init
                             data-twe-ripple-color="light">
                             {/*  Facebook  */}
-                            <IoLogoGoogle className=" text-2xl "
+                            <FaGithub className=" text-2xl "
                             />
                             Github
                         </a>

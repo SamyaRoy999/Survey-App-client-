@@ -9,11 +9,11 @@ const ManageUsers = () => {
     const axiosSecour = useAxiosSecure();
     const [users, refetch] = useAllUser();
     const [userFilter, setUserFilter] = useState('')
-    console.log(users);
+    // console.log(users);
     const hehdelSelect = async (e, user) => {
         const newRole = e.target.value;
         const res = await axiosSecour.patch(`/users/admin/${user._id}`, { role: newRole });
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data.acknowledged) {
             Swal.fire({
                 position: "top-end",
@@ -43,7 +43,7 @@ const ManageUsers = () => {
         filteredUsers = users.filter((user) => user.role === userFilter);
     }
 
-    console.log(userFilter);
+    // console.log(userFilter);
     return (
         <div className=" lg:mt-16 mx-11">
             <div className="flex flex-col">

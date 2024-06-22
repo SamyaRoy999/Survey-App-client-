@@ -22,7 +22,7 @@ const CheckoutForm = () => {
     useEffect(() => {
         axiosPublic.post('/create-payment-intent', { payment: payment })
             .then(res => {
-                console.log(res.data.clientSecret);
+                // console.log(res.data.clientSecret);
                 setClientSecret(res.data.clientSecret);
             })
     }, [axiosPublic])
@@ -48,7 +48,7 @@ const CheckoutForm = () => {
         });
 
         if (error) {
-            console.log('[error]', error);
+            // console.log('[error]', error);
             setErrorText(error)
         } else {
             console.log('[PaymentMethod]', paymentMethod);
@@ -67,13 +67,13 @@ const CheckoutForm = () => {
         if (confirmError) {
             // console.log("confirmError");
         } else {
-            console.log("paymentIntent", paymentIntent);
+            // console.log("paymentIntent", paymentIntent);
             if (paymentIntent.status === "succeeded") {
-                console.log('transactionID', paymentIntent.id);
+                // console.log('transactionID', paymentIntent.id);
                 setTransactionID(paymentIntent.id);
                 const newRole = 'pro-user';
                 const res = await axiosSecour.patch(`/users/admin/${userFilter._id}`, { role: newRole });
-                console.log(res.data);
+                // console.log(res.data);
 
                 const payment = {
                     email: user?.email,

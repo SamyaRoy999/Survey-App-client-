@@ -39,7 +39,7 @@ const SurvayDetails = () => {
                 photo: user.photoURL
             }
             const res = await axiosPublic.patch(`/vote/${id}`, votes);
-            console.log(res.data);
+            // console.log(res.data);
 
             if (res.data.acknowledged) {
                 Swal.fire({
@@ -64,7 +64,7 @@ const SurvayDetails = () => {
                 timestamp: new Date()
             };
             const res = await axiosSecure.patch(`/proUser/comment/${id}`, newComment);
-            console.log(res.data);
+            // console.log(res.data);
 
             if (res.data.acknowledged) {
                 Swal.fire({
@@ -102,7 +102,7 @@ const SurvayDetails = () => {
                 };
 
                 const res = await axiosPublic.patch(`/user/report/${id}`, reportData);
-                console.log(res.data);
+                // console.log(res.data);
 
                 if (res.data.acknowledged) {
                     Swal.fire({
@@ -134,8 +134,8 @@ const SurvayDetails = () => {
     const parsedDeadline = parseDateString(deadline);
     const survayDeadlineEnd = new Date().toLocaleDateString("en-GB") > parsedDeadline.toLocaleDateString("en-GB");
 
-    console.log(parsedDeadline);
-    console.log(new Date().toLocaleDateString("en-GB"));
+    // console.log(parsedDeadline);
+    // console.log(new Date().toLocaleDateString("en-GB"));
     return (
         <>
             <div className="mx-auto flex justify-center items-center">

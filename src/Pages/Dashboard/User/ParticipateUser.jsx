@@ -19,7 +19,7 @@ const ParticipateUser = () => {
   : [];
   refetch();
 
-  console.log(survayData);
+  // console.log(survayData);
 
 
   return (

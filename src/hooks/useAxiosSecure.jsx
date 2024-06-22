@@ -5,7 +5,7 @@ import { AuthContext } from "../Providers/AuthProvider"
 
 
 const axiosSecour = axios.create({
-    baseURL: "http://localhost:5000",
+    baseURL: "https://survey-bdserver.vercel.app",
 })
 
 const useAxiosSecure = () => {
@@ -13,7 +13,7 @@ const useAxiosSecure = () => {
     const navigate = useNavigate();
     axiosSecour.interceptors.request.use((config) => {
         const token = localStorage.getItem('access-token');
-        console.log('request stop by interceptors', token);
+        // console.log('request stop by interceptors', token);
         config.headers.authorization = `bearer ${token}`;
         return config;
     }, (error) => {
@@ -24,7 +24,7 @@ const useAxiosSecure = () => {
         return response;
     }, async (error) => {
         const status = error.response.status;
-        console.log('status is the interceptors', status);
+        // console.log('status is the interceptors', status);
         if (status === 401 || status === 403) {
             await signOutUser();
             navigate('/login');

@@ -34,7 +34,7 @@ const UpdateSingle = () => {
     const onSubmit = async (data) => {
         const { title, description, category } = data;
         const surveyCreateData = { title, description, category, deadline: startDate.toLocaleDateString("en-GB") }
-        console.log(surveyCreateData);
+        // console.log(surveyCreateData);
         const res = await axiosSecour.put(`/survayUpdate/${id}`, surveyCreateData);
         if (res.data.acknowledged) {
             Swal.fire({

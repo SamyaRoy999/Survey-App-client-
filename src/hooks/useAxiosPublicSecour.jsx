@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const axiosPiublicSecoutr = axios.create({
-    baseURL: "http://localhost:5000",
+    baseURL: "https://survey-bdserver.vercel.app",
 })
 
 const useAxiosPublicSecour = () => {

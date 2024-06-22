@@ -14,7 +14,7 @@ const Reportedsurveys = () => {
             return res.data
         }
     })
-    console.log(userReport);
+    // console.log(userReport);
 
     return (
         <div>

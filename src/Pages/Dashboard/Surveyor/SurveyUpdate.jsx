@@ -19,7 +19,7 @@ const SurveyUpdate = () => {
     if (isLoading) {
         return <span className="loading loading-bars loading-lg"></span>;
     }
-    console.log(survayorSurvey);
+    // console.log(survayorSurvey);
     return (
         <div>
             <h3 className="text-center font-Josefin font-bold text-2xl text-[#0E6251] py-6">Survey Responses with Detailed View</h3>

@@ -14,7 +14,7 @@ const SurveyResDetails = () => {
             return res.data;
         }
     });
-    console.log(SurveyDetail);
+    // console.log(SurveyDetail);
     const { voters = [] } = SurveyDetail;
 
     const voteYes = voters.filter(item => item.vote === "yes");
