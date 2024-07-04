@@ -44,10 +44,6 @@ const router = createBrowserRouter([
                 element: <Survey></Survey>
             },
             {
-                path: '/survayApp',
-                element: <SurveyorSurveysDetails></SurveyorSurveysDetails>
-            },
-            {
                 path: '/survey/survayDetails/:id',
                 element: <SurvayDetails></SurvayDetails>
             },
@@ -55,8 +51,6 @@ const router = createBrowserRouter([
                 path: '/Pro-user',
                 element: <ProUser />
             }
-
-
         ]
     },
     {

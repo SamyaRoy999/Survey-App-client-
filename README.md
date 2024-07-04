@@ -7,7 +7,6 @@ Currently, two official plugins are available:
 
 # Survey-scape
 
-Assignment Category: assignment12_category_0020
 
 A company is seeking a talented Developer to contribute to developing a Survey application using the MERN (MongoDB, Express.js, React.js, Node.js) stack. This project involves integrating payment functionalities, implementing a robust user management system, and creating an admin dashboard with role management. As a vital team member, you will be pivotal in crafting a feature-rich platform for survey creation, voting, result analysis, and user interaction.
 
